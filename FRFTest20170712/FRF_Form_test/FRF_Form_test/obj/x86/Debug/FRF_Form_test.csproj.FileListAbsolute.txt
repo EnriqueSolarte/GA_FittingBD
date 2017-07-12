@@ -1,0 +1,19 @@
+C:\LAB\Mechatronics System Modelling\Mechatronics System Modelling\ForTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\FRF_Form_test.exe
+C:\LAB\Mechatronics System Modelling\Mechatronics System Modelling\ForTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\FRF_Form_test.pdb
+C:\LAB\Mechatronics System Modelling\Mechatronics System Modelling\ForTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\Mechatronics.dll
+C:\LAB\Mechatronics System Modelling\Mechatronics System Modelling\ForTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\Mechatronics.pdb
+C:\LAB\Mechatronics System Modelling\Mechatronics System Modelling\ForTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.csprojResolveAssemblyReference.cache
+C:\LAB\Mechatronics System Modelling\Mechatronics System Modelling\ForTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.Properties.Resources.resources
+C:\LAB\Mechatronics System Modelling\Mechatronics System Modelling\ForTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.csproj.GenerateResource.Cache
+C:\LAB\Mechatronics System Modelling\Mechatronics System Modelling\ForTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.exe
+C:\LAB\Mechatronics System Modelling\Mechatronics System Modelling\ForTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.pdb
+C:\LAB\Mechatronics System Modelling\Mechatronics System Modelling\ForTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.Form1.resources
+D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.exe
+D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.pdb
+D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\FRF_Form_test.exe
+D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\FRF_Form_test.pdb
+D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\Mechatronics.pdb
+D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.csprojResolveAssemblyReference.cache
+D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.Form1.resources
+D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.Properties.Resources.resources
+D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.csproj.GenerateResource.Cache
