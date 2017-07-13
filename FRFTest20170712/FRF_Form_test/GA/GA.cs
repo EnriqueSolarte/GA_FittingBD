@@ -14,7 +14,11 @@ namespace GeneticAlgorithm
         public Result result { get; }
         public int generations { get; }
 
+        public double[][] rangeFeatures { get; set; }
+
         public double pCrossover { get; }
+        public double pMutation { get; }
+
 
 
         #endregion
@@ -33,12 +37,10 @@ namespace GeneticAlgorithm
 
         }
 
-        private void CrossOver()
+        private void Crossover()
         {
             Random rnd = new Random();
-
             double[][] selectedPopulation = populations.ElementAt(populations.Count);
-
             for (int i = 0; i < selectedPopulation.Length; i = i + 2)
             {
                 if (rnd.NextDouble() <= pCrossover)
@@ -47,7 +49,7 @@ namespace GeneticAlgorithm
                     {
                         double aux = rnd.NextDouble();
                         selectedPopulation[i][j] = (1 - aux) * selectedPopulation[i][j] + aux * selectedPopulation[i + 1][j];
-                        selectedPopulation[i+1][j] = aux * selectedPopulation[i][j] + (1-aux) * selectedPopulation[i + 1][j];
+                        selectedPopulation[i + 1][j] = aux * selectedPopulation[i][j] + (1 - aux) * selectedPopulation[i + 1][j];
                     }
                 }
             }
@@ -55,6 +57,19 @@ namespace GeneticAlgorithm
 
         private void Mutation()
         {
+            Random rnd = new Random();
+            double[][] selectedPopulation = populations.ElementAt(populations.Count);
+
+            for (int i = 0; i < selectedPopulation.Length; i++)
+            {
+                if (rnd.NextDouble() <= pMutation)
+                {
+                    for (int j = 0; j < selectedPopulation[0].Length; j++)
+                    {
+                        selectedPopulation[i][j] = rangeFeatures[j][0] + rnd.NextDouble() * (rangeFeatures[j][1] - rangeFeatures[j][0]);
+                    }
+                }
+            }
         }
 
         #endregion
