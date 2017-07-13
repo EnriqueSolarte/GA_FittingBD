@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GA
+namespace GeneticAlgorithm
 {
-    public class GeneticAlgorothm
+    public class GA
     {
     }
 }

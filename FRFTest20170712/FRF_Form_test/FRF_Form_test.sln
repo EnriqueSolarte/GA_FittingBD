@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRF_Form_test", "FRF_Form_test\FRF_Form_test.csproj", "{2DC149B2-FA86-4CB1-8AB0-4DAF66597DB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GA", "GA\GA.csproj", "{E472B8FD-F2F6-4F4F-8D20-F9849F91416A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneticAlgorithm", "GA\GeneticAlgorithm.csproj", "{E472B8FD-F2F6-4F4F-8D20-F9849F91416A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

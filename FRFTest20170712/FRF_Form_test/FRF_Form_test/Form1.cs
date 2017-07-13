@@ -17,9 +17,6 @@ using Mechatronics.MathToolBox;
 using Mechatronics.MSMObject;
 using Mechatronics.Analysis;
 
-
-
-
 namespace FRF_Form_test
 {
     public partial class Form1 : Form
@@ -28,6 +25,7 @@ namespace FRF_Form_test
         {
             InitializeComponent();
 
+            
             //Function object
             VelocityResponse VR = new VelocityResponse();
             

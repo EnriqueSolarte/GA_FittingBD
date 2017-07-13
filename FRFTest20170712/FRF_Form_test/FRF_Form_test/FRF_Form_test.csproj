@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GA">
-      <HintPath>..\GA\bin\Debug\GA.dll</HintPath>
-    </Reference>
     <Reference Include="Mechatronics">
       <HintPath>..\..\Mechatronics Solution\Mechatronics\bin\Debug\Mechatronics.dll</HintPath>
     </Reference>
