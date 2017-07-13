@@ -26,68 +26,47 @@ namespace FRF_Form_test
         {
             InitializeComponent();
 
+            //Function object
+            VelocityResponse VR = new VelocityResponse();
+            
+            //Set experiment Control Parameters (C controller)
+            Parameters P = new Parameters();
+            SetParameters(P);
+            VR.P = P;
+
+            //Defining target, read FRF file from csv file, which is created by servoguide
+            FRF[] VClose_ref = VR.ReadServoGuide_FRFdata_csv("Frequency_Response_Axis-1_1_-_1000Hz.csv");
+
+            //GA Definition
+
+            //Population randomly
+            //VLoopModes creation by population
+            
             //Create Structure Nature Modes Object
             List<Mode> VLoopModes = new List<Mode>();
             CreateModes(VLoopModes);
-
-            //Set experiment Control Parameters 
-            Parameters P = new Parameters();
-            SetParameters(P);
-            // setting C controller 
-
-            //create Object
-            Mechatronics.Analysis.VelocityResponse VR = new VelocityResponse();
-
-
-            //read FRF File from csv file, which is created by servoguide
-            //this data is considered as referance.
-            FRF[] VClose_ref =
-                VR.ReadServoGuide_FRFdata_csv("Frequency_Response_Axis-1_1_-_1000Hz.csv");
-            FRF aaa = new FRF();
-            
-
-            VR.P = P;
             VR.VLoopModes = VLoopModes;
 
+            //Evaluation
             FRF[] Close = VR.SolveCloseLoopResponse();
-
             FRF[] Open = VR.SolveOpenLoopResponse();
 
+            //Grading
+            
+            //Selection
+            //Crossovewr
+            //Mutation
+            //Reassignation
             
 
             // draw referance FRF in chart
             DrawLine(VClose_ref, 0);
-
             // draw simulated FRF in chart
             DrawLine(Close, 1);
 
         }
+        
 
-
-
-
-
-        void SetParameters(Parameters P)
-        {//value is from *.prm file (ServoGuide Parameter file)
-            P.FANUCs.HRVGain = 300;
-            P.FANUCs.VelocityLoopGain = 100;
-            P.FANUCs.No2043_KVI_Standard = 198;
-            P.FANUCs.No2044_KVP_Standard = -1775;
-            P.FANUCs.No2043_KVI_Setting = 198;
-            P.FANUCs.No2044_KVP_Setting = -1775;
-
-
-            P.Jm = 0.012;
-            P.Kt = 1.2;
-            P.dTzoh = 0.001m;
-            P.Tc = 0;
-            P.JL = 0.00546;
-            P.IsHighCycle = true;
-            P.IsFullCloseLoop = true;
-
-            P.ConvertFUNUCParamters();
-
-        }
         void CreateModes(List<Mode> VLoopModes)
         {
 
@@ -115,6 +94,29 @@ namespace FRF_Form_test
 
         }
 
+        #region Fixed Parameters
+        void SetParameters(Parameters P)
+        {//value is from *.prm file (ServoGuide Parameter file)
+            P.FANUCs.HRVGain = 300;
+            P.FANUCs.VelocityLoopGain = 100;
+            P.FANUCs.No2043_KVI_Standard = 198;
+            P.FANUCs.No2044_KVP_Standard = -1775;
+            P.FANUCs.No2043_KVI_Setting = 198;
+            P.FANUCs.No2044_KVP_Setting = -1775;
+
+
+            P.Jm = 0.012;
+            P.Kt = 1.2;
+            P.dTzoh = 0.001m;
+            P.Tc = 0;
+            P.JL = 0.00546;
+            P.IsHighCycle = true;
+            P.IsFullCloseLoop = true;
+
+            P.ConvertFUNUCParamters();
+
+        }
+
         void DrawLine(FRF[] FRFData, int Channel)
         {
             //X AXIS in log scale
@@ -133,7 +135,7 @@ namespace FRF_Form_test
             }
 
         }
-
+        #endregion   
 
     }
 }
