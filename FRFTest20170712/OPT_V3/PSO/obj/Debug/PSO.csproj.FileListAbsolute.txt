@@ -1,0 +1,7 @@
+C:\LAB\C#\OPT\OPT_V2.1\PSO\bin\Debug\PSO.dll
+C:\LAB\C#\OPT\OPT_V2.1\PSO\bin\Debug\PSO.pdb
+C:\LAB\C#\OPT\OPT_V2.1\PSO\bin\Debug\IOPT.dll
+C:\LAB\C#\OPT\OPT_V2.1\PSO\bin\Debug\IOPT.pdb
+C:\LAB\C#\OPT\OPT_V2.1\PSO\obj\Debug\PSO.csprojResolveAssemblyReference.cache
+C:\LAB\C#\OPT\OPT_V2.1\PSO\obj\Debug\PSO.dll
+C:\LAB\C#\OPT\OPT_V2.1\PSO\obj\Debug\PSO.pdb

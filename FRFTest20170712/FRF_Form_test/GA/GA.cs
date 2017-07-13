@@ -17,11 +17,8 @@ namespace GeneticAlgorithm
         private double[][] rangeFeatures { get; set; }
         private double pCrossover { get; }
         private double pMutation { get; }
-        private int populationSize { get; set; }
-
-
-        private double[] curretnFitness;
-        private double sumatoryFitness;
+        private int populationSize { get; set; } 
+        private bool opTYpe;
         
 
         #endregion
@@ -42,43 +39,60 @@ namespace GeneticAlgorithm
             return newPopulation;
         }
 
-        public GA(int _populationSize, double[][] _rangefeatures, double _pCrossover, double _pMutaion)
+        public GA(int _populationSize, double[][] _rangefeatures, double _pCrossover, double _pMutaion, bool _opType)
         {
+
+            opTYpe = _opType;
             rangeFeatures = _rangefeatures;
             populationSize = _populationSize;
             pCrossover = _pCrossover;
             pMutation = _pMutaion;
             populations.Add(initializePopulation());
-
+        
         }
 
-        public void Run()
+        public void Run(double[] _currentFitness)
         {
+            if (opTYpe)
+            {
+                result.maxFitnessRecord.Add(_currentFitness.Max());
+                result.meanFitnessRecord.Add(_currentFitness.Sum() / populationSize);
+                int index = _currentFitness.ToList().IndexOf(_currentFitness.Max());
+
+                double[] possibleBestFeature = populations.ElementAt(populations.Count)[index];
+
+                
+            }
+
             double[][] currentPopulation = populations.ElementAt(populations.Count);
-            double[][] newPopulation = Selection(currentPopulation);
+            double[][] newPopulation = Selection(currentPopulation, _currentFitness);
             newPopulation = Crossover(newPopulation);
             newPopulation = Mutation(newPopulation);
             populations.Add(newPopulation);
         }
 
+   
+
         #endregion
 
         #region Privates Fucntion
 
-        private double[][] Selection(double[][] currentPopulation)
+        private double[][] Selection(double[][] currentPopulation, double[] currentFitness)
         {
             Random rnd = new Random();
+            double sumatoryFitness = currentFitness.Sum();
+
             double[][] selectedPopulation = new double[populationSize][];
 
             for (int i =0; i < populationSize; i++)
             {
                 double test = rnd.NextDouble() * sumatoryFitness;
-                double partSum = curretnFitness[0];
+                double partSum = currentFitness[0];
                 int j = 0;
 
                 while (partSum < test)
                 {
-                    partSum = partSum + curretnFitness[j + 1];
+                    partSum = partSum + currentFitness[j + 1];
                     j++;
 
                     if (j == populationSize) j = 0;
@@ -128,8 +142,6 @@ namespace GeneticAlgorithm
         }
 
         #endregion
-
-
 
         #region Classes
         public class Result

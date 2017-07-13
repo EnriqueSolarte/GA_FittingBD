@@ -1,0 +1,14 @@
+C:\LAB\C#\OPT\OPT_V2.1\GA\bin\Debug\GA.dll
+C:\LAB\C#\OPT\OPT_V2.1\GA\bin\Debug\GA.pdb
+C:\LAB\C#\OPT\OPT_V2.1\GA\bin\Debug\IOPT.dll
+C:\LAB\C#\OPT\OPT_V2.1\GA\bin\Debug\IOPT.pdb
+C:\LAB\C#\OPT\OPT_V2.1\GA\obj\Debug\GA.csprojResolveAssemblyReference.cache
+C:\LAB\C#\OPT\OPT_V2.1\GA\obj\Debug\GA.dll
+C:\LAB\C#\OPT\OPT_V2.1\GA\obj\Debug\GA.pdb
+C:\LAB\C#\OPT\OPT_V3\GA\obj\Debug\GA.csprojResolveAssemblyReference.cache
+C:\LAB\C#\OPT\OPT_V3\GA\obj\Debug\GA.dll
+C:\LAB\C#\OPT\OPT_V3\GA\obj\Debug\GA.pdb
+C:\LAB\C#\OPT\OPT_V3\GA\bin\Debug\GA.dll
+C:\LAB\C#\OPT\OPT_V3\GA\bin\Debug\GA.pdb
+C:\LAB\C#\OPT\OPT_V3\GA\bin\Debug\IOPT.dll
+C:\LAB\C#\OPT\OPT_V3\GA\bin\Debug\IOPT.pdb
