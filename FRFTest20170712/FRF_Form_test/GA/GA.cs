@@ -14,16 +14,31 @@ namespace GeneticAlgorithm
         public Result result { get; }
         public int generations { get; }
 
-        public double[][] rangeFeatures { get; set; }
-
-        public double pCrossover { get; }
-        public double pMutation { get; }
-
-
+        private double[][] rangeFeatures { get; set; }
+        private double pCrossover { get; }
+        private double pMutation { get; }
+        private int populationSize { get; set; }
+        
 
         #endregion
 
         #region Public Funtions
+
+
+        //Population Random generations
+        private double[][] initializePopulation()
+        {
+            Random rnd = new Random();
+            double[][] newPopulation = new double[populationSize][];
+            for (int i = 0; i < populationSize; i++)
+            {
+                for (int j = 0; j < rangeFeatures.Length; j++)
+                {
+                    newPopulation[i][j] = rangeFeatures[j][0] + rnd.NextDouble() * (rangeFeatures[j][1] - rangeFeatures[j][0]);
+                }
+            }
+            return newPopulation;
+        }
 
         public GA(int population, double[][] rangefeatures, double _pCrossover, double _pMutaion)
         {
@@ -33,6 +48,7 @@ namespace GeneticAlgorithm
             pMutation = _pMutaion;
 
         }
+
         //Run Function 
 
         #endregion
@@ -48,11 +64,11 @@ namespace GeneticAlgorithm
         {
             Random rnd = new Random();
             double[][] selectedPopulation = populations.ElementAt(populations.Count);
-            for (int i = 0; i < selectedPopulation.Length; i = i + 2)
+            for (int i = 0; i < populationSize; i = i + 2)
             {
                 if (rnd.NextDouble() <= pCrossover)
                 {
-                    for (int j = 0; j < selectedPopulation[0].Length; j++)
+                    for (int j = 0; j < rangeFeatures.Length; j++)
                     {
                         double aux = rnd.NextDouble();
                         selectedPopulation[i][j] = (1 - aux) * selectedPopulation[i][j] + aux * selectedPopulation[i + 1][j];
@@ -67,11 +83,11 @@ namespace GeneticAlgorithm
             Random rnd = new Random();
             double[][] selectedPopulation = populations.ElementAt(populations.Count);
 
-            for (int i = 0; i < selectedPopulation.Length; i++)
+            for (int i = 0; i < populationSize; i++)
             {
                 if (rnd.NextDouble() <= pMutation)
                 {
-                    for (int j = 0; j < selectedPopulation[0].Length; j++)
+                    for (int j = 0; j < rangeFeatures.Length; j++)
                     {
                         selectedPopulation[i][j] = rangeFeatures[j][0] + rnd.NextDouble() * (rangeFeatures[j][1] - rangeFeatures[j][0]);
                     }
