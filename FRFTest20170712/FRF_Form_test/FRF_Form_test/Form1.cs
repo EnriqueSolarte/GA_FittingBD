@@ -39,11 +39,8 @@ namespace FRF_Form_test
             FRF[] VClose_ref = VR.ReadServoGuide_FRFdata_csv("Frequency_Response_Axis-1_1_-_1000Hz.csv");
 
             //GA Definition
-            GA GeneA = new GA();
-            
-            
-
-            //Population randomly
+           
+     
             //VLoopModes creation by population
             
             //Create Structure Nature Modes Object
@@ -56,7 +53,7 @@ namespace FRF_Form_test
             FRF[] Open = VR.SolveOpenLoopResponse();
 
             //Grading
-            GA.
+            
             //Selection
             //Crossovewr
             //Mutation
