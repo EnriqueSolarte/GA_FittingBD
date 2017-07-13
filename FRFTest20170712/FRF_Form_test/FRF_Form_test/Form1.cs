@@ -17,6 +17,8 @@ using Mechatronics.MathToolBox;
 using Mechatronics.MSMObject;
 using Mechatronics.Analysis;
 
+using GeneticAlgorithm;
+
 namespace FRF_Form_test
 {
     public partial class Form1 : Form
@@ -24,8 +26,7 @@ namespace FRF_Form_test
         public Form1()
         {
             InitializeComponent();
-
-            
+        
             //Function object
             VelocityResponse VR = new VelocityResponse();
             
@@ -52,7 +53,7 @@ namespace FRF_Form_test
             FRF[] Open = VR.SolveOpenLoopResponse();
 
             //Grading
-            
+            GA.
             //Selection
             //Crossovewr
             //Mutation

@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithm
 {
-    public class GA
+    public class Result
     {
-        private double[][] population;
-        public Result result { get; }
-
-
-
     }
 }

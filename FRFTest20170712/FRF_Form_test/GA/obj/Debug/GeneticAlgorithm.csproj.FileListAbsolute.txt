@@ -2,3 +2,4 @@ D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\bin
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\bin\Debug\GeneticAlgorithm.pdb
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\obj\Debug\GeneticAlgorithm.dll
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\obj\Debug\GeneticAlgorithm.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\obj\Debug\GeneticAlgorithm.csprojResolveAssemblyReference.cache
