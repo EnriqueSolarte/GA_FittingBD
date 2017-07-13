@@ -14,6 +14,8 @@ namespace GeneticAlgorithm
         public Result result { get; }
         public int generations { get; }
 
+        public double pCrossover { get; }
+
 
         #endregion
 
@@ -37,15 +39,15 @@ namespace GeneticAlgorithm
 
             double[][] selectedPopulation = populations.ElementAt(populations.Count);
 
-            for (int i = 0; i < features.populationSize - 1; i = i + 2)
+            for (int i = 0; i < selectedPopulation.Length; i = i + 2)
             {
                 if (rnd.NextDouble() <= pCrossover)
                 {
-                    for (int j = 0; j < features.numberFeatures; j++)
+                    for (int j = 0; j < selectedPopulation[0].Length; j++)
                     {
                         double aux = rnd.NextDouble();
-                        features.population[i, j] = (1 - aux) * selectedPopulation[i, j] + aux * selectedPopulation[i + 1, j];
-                        features.population[i + 1, j] = aux * selectedPopulation[i, j] + (1 - aux) * selectedPopulation[i + 1, j];
+                        selectedPopulation[i][j] = (1 - aux) * selectedPopulation[i][j] + aux * selectedPopulation[i + 1][j];
+                        selectedPopulation[i+1][j] = aux * selectedPopulation[i][j] + (1-aux) * selectedPopulation[i + 1][j];
                     }
                 }
             }
