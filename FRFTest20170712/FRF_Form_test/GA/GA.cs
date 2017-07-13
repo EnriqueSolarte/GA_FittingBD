@@ -18,13 +18,15 @@ namespace GeneticAlgorithm
         private double pCrossover { get; }
         private double pMutation { get; }
         private int populationSize { get; set; }
+
+
+        private double[] curretnFitness;
+        private double sumatoryFitness;
         
 
         #endregion
 
         #region Public Funtions
-
-
         //Population Random generations
         private double[][] initializePopulation()
         {
@@ -40,30 +42,57 @@ namespace GeneticAlgorithm
             return newPopulation;
         }
 
-        public GA(int population, double[][] rangefeatures, double _pCrossover, double _pMutaion)
+        public GA(int _populationSize, double[][] _rangefeatures, double _pCrossover, double _pMutaion)
         {
-
-            
+            rangeFeatures = _rangefeatures;
+            populationSize = _populationSize;
             pCrossover = _pCrossover;
             pMutation = _pMutaion;
+            populations.Add(initializePopulation());
 
         }
 
-        //Run Function 
+        public void Run()
+        {
+            double[][] currentPopulation = populations.ElementAt(populations.Count);
+            double[][] newPopulation = Selection(currentPopulation);
+            newPopulation = Crossover(newPopulation);
+            newPopulation = Mutation(newPopulation);
+            populations.Add(newPopulation);
+        }
 
         #endregion
 
         #region Privates Fucntion
 
-        private void Selection()
-        {
-
-        }
-
-        private void Crossover()
+        private double[][] Selection(double[][] currentPopulation)
         {
             Random rnd = new Random();
-            double[][] selectedPopulation = populations.ElementAt(populations.Count);
+            double[][] selectedPopulation = new double[populationSize][];
+
+            for (int i =0; i < populationSize; i++)
+            {
+                double test = rnd.NextDouble() * sumatoryFitness;
+                double partSum = curretnFitness[0];
+                int j = 0;
+
+                while (partSum < test)
+                {
+                    partSum = partSum + curretnFitness[j + 1];
+                    j++;
+
+                    if (j == populationSize) j = 0;
+                }
+                selectedPopulation[i] = currentPopulation[j];                              
+            }
+
+            return selectedPopulation;
+        }
+
+        private double[][] Crossover(double[][] currentPopulation)
+        {
+            Random rnd = new Random();
+            double[][] selectedPopulation = currentPopulation;
             for (int i = 0; i < populationSize; i = i + 2)
             {
                 if (rnd.NextDouble() <= pCrossover)
@@ -71,17 +100,18 @@ namespace GeneticAlgorithm
                     for (int j = 0; j < rangeFeatures.Length; j++)
                     {
                         double aux = rnd.NextDouble();
-                        selectedPopulation[i][j] = (1 - aux) * selectedPopulation[i][j] + aux * selectedPopulation[i + 1][j];
-                        selectedPopulation[i + 1][j] = aux * selectedPopulation[i][j] + (1 - aux) * selectedPopulation[i + 1][j];
+                        selectedPopulation[i][j] = (1 - aux) * currentPopulation[i][j] + aux * currentPopulation[i + 1][j];
+                        selectedPopulation[i + 1][j] = aux * currentPopulation[i][j] + (1 - aux) * currentPopulation[i + 1][j];
                     }
                 }
             }
+            return selectedPopulation;
         }
 
-        private void Mutation()
+        private double[][] Mutation(double[][] currentPopulation)
         {
             Random rnd = new Random();
-            double[][] selectedPopulation = populations.ElementAt(populations.Count);
+            double[][] selectedPopulation = currentPopulation;
 
             for (int i = 0; i < populationSize; i++)
             {
@@ -93,6 +123,8 @@ namespace GeneticAlgorithm
                     }
                 }
             }
+
+            return selectedPopulation;
         }
 
         #endregion
@@ -103,10 +135,10 @@ namespace GeneticAlgorithm
         public class Result
         {
             //Propieties to Reult
-            public double[] maxFitness{ get; }
-            public double[] meanFitness { get; }
-            public double[][] bestFeatures { get; }
-            public double[] theBestFeture { get; set; }
+            public List<double> maxFitnessRecord { get; }
+            public List<double> meanFitnessRecord { get; }
+            public List<double[]> bestFeaturesRecord { get; }
+            public double[] bestFeature { get; set; }
         }
 
        
