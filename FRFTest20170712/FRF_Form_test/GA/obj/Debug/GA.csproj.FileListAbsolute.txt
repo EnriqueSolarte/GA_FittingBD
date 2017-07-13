@@ -1,0 +1,5 @@
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\bin\Debug\GA.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\bin\Debug\GA.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\obj\Debug\GA.csprojResolveAssemblyReference.cache
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\obj\Debug\GA.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\obj\Debug\GA.pdb

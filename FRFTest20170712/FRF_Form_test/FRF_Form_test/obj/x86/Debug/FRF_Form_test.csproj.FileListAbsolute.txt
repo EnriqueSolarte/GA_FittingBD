@@ -17,3 +17,12 @@ D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_te
 D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.Form1.resources
 D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.Properties.Resources.resources
 D:\GitHub\GA_appication\GA_application\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.csproj.GenerateResource.Cache
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.exe
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\FRF_Form_test.exe
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\FRF_Form_test.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\Mechatronics.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.csprojResolveAssemblyReference.cache
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.Form1.resources
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.Properties.Resources.resources
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.csproj.GenerateResource.Cache
