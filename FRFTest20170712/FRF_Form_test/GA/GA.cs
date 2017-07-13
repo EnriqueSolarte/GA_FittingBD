@@ -25,7 +25,14 @@ namespace GeneticAlgorithm
 
         #region Public Funtions
 
-        //Population Random generations
+        public GA(int population, double[][] rangefeatures, double _pCrossover, double _pMutaion)
+        {
+
+            
+            pCrossover = _pCrossover;
+            pMutation = _pMutaion;
+
+        }
         //Run Function 
 
         #endregion
@@ -79,7 +86,11 @@ namespace GeneticAlgorithm
         #region Classes
         public class Result
         {
-
+            //Propieties to Reult
+            public double[] maxFitness{ get; }
+            public double[] meanFitness { get; }
+            public double[][] bestFeatures { get; }
+            public double[] theBestFeture { get; set; }
         }
 
        
