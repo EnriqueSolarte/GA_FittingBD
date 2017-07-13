@@ -13,6 +13,8 @@ namespace GeneticAlgorithm
         public List<double[][]> populations { get; }
         public Result result { get; }
         public int generations { get; }
+        public double pMutation { get; }
+        public double[][] rangeFeatures { get; set; }
 
 
         #endregion
@@ -31,28 +33,22 @@ namespace GeneticAlgorithm
 
         }
 
-        private void CrossOver()
+        private void Mutation()
         {
             Random rnd = new Random();
-
             double[][] selectedPopulation = populations.ElementAt(populations.Count);
 
-            for (int i = 0; i < features.populationSize - 1; i = i + 2)
+            for (int i = 0; i < selectedPopulation.Length; i++)
             {
-                if (rnd.NextDouble() <= pCrossover)
+                if (rnd.NextDouble() <= pMutation)
                 {
-                    for (int j = 0; j < features.numberFeatures; j++)
+                    for (int j = 0; j < selectedPopulation[0].Length; j++)
                     {
-                        double aux = rnd.NextDouble();
-                        features.population[i, j] = (1 - aux) * selectedPopulation[i, j] + aux * selectedPopulation[i + 1, j];
-                        features.population[i + 1, j] = aux * selectedPopulation[i, j] + (1 - aux) * selectedPopulation[i + 1, j];
+                        selectedPopulation[i][j] = rangeFeatures[j][0] + rnd.NextDouble() * (rangeFeatures[j][1] - rangeFeatures[j][0]);
+
                     }
                 }
             }
-        }
-
-        private void Mutation()
-        {
         }
 
         #endregion
