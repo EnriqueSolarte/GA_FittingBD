@@ -6,7 +6,7 @@ using System.Text;
 namespace Optimization
 {
     
-    public class GA : Optimization.IOPTSolver
+    public class GA : IOPTSolver
     {
 
         List<HistoryItem> optHistory;
@@ -61,7 +61,7 @@ namespace Optimization
         }
 
         Variable[] variables;
-        public Variable[] Variables
+        Variable[] Variables
         {
             get
             {
@@ -75,8 +75,26 @@ namespace Optimization
             }
         }
 
+        Variable[] IOPTSolver.Variables
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         GA_Setting Settings = new GA_Setting();
+
+
+        public GA(ObjectiveFunction parOBJ)
+        {
+
+        }
     }
 
     public class GA_Setting

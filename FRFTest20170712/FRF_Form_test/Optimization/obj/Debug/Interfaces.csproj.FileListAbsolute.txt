@@ -1,0 +1,5 @@
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\Optimization\bin\Debug\IOPT.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\Optimization\bin\Debug\IOPT.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\Optimization\obj\Debug\Interfaces.csprojResolveAssemblyReference.cache
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\Optimization\obj\Debug\IOPT.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\Optimization\obj\Debug\IOPT.pdb

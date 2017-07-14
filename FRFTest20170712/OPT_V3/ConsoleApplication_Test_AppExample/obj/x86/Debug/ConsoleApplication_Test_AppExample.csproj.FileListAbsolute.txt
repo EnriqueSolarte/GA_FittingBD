@@ -33,3 +33,5 @@ C:\LAB\C#\OPT\OPT_V3\ConsoleApplication_Test_AppExample\bin\Debug\GA.pdb
 C:\LAB\C#\OPT\OPT_V3\ConsoleApplication_Test_AppExample\obj\x86\Debug\ConsoleApplication_Test_AppExample.csprojResolveAssemblyReference.cache
 F:\OPT_V3\ConsoleApplication_Test_AppExample\obj\x86\Debug\ConsoleApplication_Test_AppExample.exe
 F:\OPT_V3\ConsoleApplication_Test_AppExample\obj\x86\Debug\ConsoleApplication_Test_AppExample.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\ConsoleApplication_Test_AppExample\obj\x86\Debug\ConsoleApplication_Test_AppExample.exe
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\ConsoleApplication_Test_AppExample\obj\x86\Debug\ConsoleApplication_Test_AppExample.pdb

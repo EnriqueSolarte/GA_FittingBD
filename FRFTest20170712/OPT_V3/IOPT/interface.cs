@@ -49,6 +49,7 @@ namespace Optimization
     {
         public double Max = double.MaxValue;
         public double Min = double.MinValue;
+     
     }
     
     public struct Response

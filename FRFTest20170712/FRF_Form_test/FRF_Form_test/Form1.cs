@@ -16,8 +16,9 @@ using System.Xml;
 using Mechatronics.MathToolBox;
 using Mechatronics.MSMObject;
 using Mechatronics.Analysis;
+using Optimization;
 
-using GeneticAlgorithm;
+
 
 namespace FRF_Form_test
 {
@@ -39,8 +40,8 @@ namespace FRF_Form_test
             FRF[] VClose_ref = VR.ReadServoGuide_FRFdata_csv("Frequency_Response_Axis-1_1_-_1000Hz.csv");
 
             //GA Definition
-           
-     
+            
+             
             //VLoopModes creation by population
             
             //Create Structure Nature Modes Object

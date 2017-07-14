@@ -1,0 +1,7 @@
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA2\bin\Debug\GA2.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA2\bin\Debug\GA2.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA2\bin\Debug\IOPT.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA2\bin\Debug\IOPT.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA2\obj\Debug\GA2.csprojResolveAssemblyReference.cache
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA2\obj\Debug\GA2.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA2\obj\Debug\GA2.pdb

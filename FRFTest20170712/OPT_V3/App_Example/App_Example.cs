@@ -18,15 +18,15 @@ namespace App_Example
             return results;
         }
 
+        public double[] SecondObjFunction(double[] var)
+        {
+            return new double[2];
+        }
+
         public void Run_OPT()
         {
             
-            Response RES = new Response();
-            Variable VARS = new Variable();
-
-
-            GA GA_Solver = new GA(FEM_Solver, RES, VARS);
-
+            GA GA_Solver = new GA(FEM_Solver);
             GA_Solver.Solve();
 
         }

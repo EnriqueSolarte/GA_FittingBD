@@ -1,0 +1,7 @@
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\bin\Debug\GeneticAlgorithm.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\bin\Debug\GeneticAlgorithm.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\bin\Debug\IOPT.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\bin\Debug\IOPT.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\obj\Debug\Optimization.csprojResolveAssemblyReference.cache
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\obj\Debug\GeneticAlgorithm.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\GA\obj\Debug\GeneticAlgorithm.pdb
