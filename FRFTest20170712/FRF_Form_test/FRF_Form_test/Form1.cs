@@ -40,6 +40,8 @@ namespace FRF_Form_test
             FRF[] VClose_ref = VR.ReadServoGuide_FRFdata_csv("Frequency_Response_Axis-1_1_-_1000Hz.csv");
 
             //GA Definition
+            GeneticAlgorithm GA = new GeneticAlgorithm();
+
             
              
             //VLoopModes creation by population

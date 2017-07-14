@@ -29,6 +29,8 @@ namespace App_Example
             GA GA_Solver = new GA(FEM_Solver);
             GA_Solver.Solve();
 
+            GA myGA = new GA(SecondObjFunction);
+
         }
     }
 

@@ -28,6 +28,7 @@ namespace Optimization
         /// </summary>
         List<HistoryItem> OPTHistory { get; set; }
 
+        
     }
 
     /// <summary>

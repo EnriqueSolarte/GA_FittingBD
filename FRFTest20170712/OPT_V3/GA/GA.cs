@@ -90,7 +90,8 @@ namespace Optimization
 
         GA_Setting Settings = new GA_Setting();
 
-
+   
+        
         public GA(ObjectiveFunction parOBJ)
         {
 
