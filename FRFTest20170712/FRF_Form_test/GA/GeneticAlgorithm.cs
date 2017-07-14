@@ -15,23 +15,20 @@ namespace Optimization
 
         public Result OPTResult { get; set; }
         public List<Result> OPTHistoryResult { get; set; }
-
-        //Interface Method
         public double[] Solve(ObjectiveFunction ObjFunc)
         {
-            double[] result = new double[GA_Settings.RangeFeatures.Count];
             if (Validation())
             {
 
                 PopulationsHistory.Clear();
-                FittnesHistory.Clear();
+                FitnessHistory.Clear();
 
                 #region Initial Population and its Fitness
 
                 double[][] initilaPopulation = initializePopulation();
                 PopulationsHistory.Add(initilaPopulation);
 
-                Fitness initialFitness = new Fitness();
+                Fitness initialFitness = new Fitness(GA_Settings.PopulationSize);
                 for (int i = 0; i < GA_Settings.PopulationSize; i++)
                 {
                     initialFitness.FitnessPopulation[i] = ObjFunc(initilaPopulation[i]);
@@ -39,7 +36,7 @@ namespace Optimization
 
                 initialFitness.SetFitenessData();
                 initialFitness.BestFeature = initilaPopulation[initialFitness.MaxFitnessIndex];
-                FittnesHistory.Add(initialFitness);
+                FitnessHistory.Add(initialFitness);
 
                 #endregion
 
@@ -48,8 +45,15 @@ namespace Optimization
                 #region While Loop for Genereations
                 while (GA_Settings.Generations <= gen)
                 {
-                    double[][] currentPopulation = PopulationsHistory.Last();
-                    Fitness currentFitness = new Fitness();
+                    double[][] currentPopulation = new double[GA_Settings.PopulationSize][];
+                    currentPopulation = PopulationsHistory.Last();
+
+                    double[][] newPopulation = new double[GA_Settings.PopulationSize][];
+
+                    Fitness currentFitness = new Fitness(GA_Settings.PopulationSize);
+                    Fitness newFitness = new Fitness(GA_Settings.PopulationSize);
+
+
                     for (int i = 0; i < GA_Settings.PopulationSize; i++)
                     {
                         currentFitness.FitnessPopulation[i] = ObjFunc(currentPopulation[i]);
@@ -57,20 +61,18 @@ namespace Optimization
                     currentFitness.SetFitenessData();
                     currentFitness.BestFeature = currentPopulation[currentFitness.MaxFitnessIndex];
 
-                    double[][] newPopulation = new double[GA_Settings.PopulationSize][];
 
                     newPopulation = Selection(currentPopulation, currentFitness.FitnessPopulation);
                     newPopulation[0] = currentFitness.BestFeature;
                     newPopulation = Crossover(newPopulation);
                     newPopulation = Mutation(newPopulation);
                   
-                    Fitness newFitness = new Fitness();
                     for (int i = 0; i < GA_Settings.PopulationSize; i++)
                     {
                         newFitness.FitnessPopulation[i] = ObjFunc(newPopulation[i]);
                     }
                     newFitness.SetFitenessData();
-
+                    newFitness.BestFeature = newPopulation[newFitness.MaxFitnessIndex];
 
                     #region Saving Best fearture  NEW Vs CURRENT
                     if (newFitness.MaxFitness <= currentFitness.MaxFitness)
@@ -79,41 +81,34 @@ namespace Optimization
                         newFitness.FitnessPopulation[0] = currentFitness.MaxFitness;
                         newFitness.SetFitenessData();
                     }
-                    else
-                    {
-                        newFitness.BestFeature = newPopulation[newFitness.MaxFitnessIndex];
-                    }
-
                     #endregion
 
-
                     PopulationsHistory.Add(newPopulation);
-                    FittnesHistory.Add(newFitness);
+                    FitnessHistory.Add(newFitness);
 
-                    result = newFitness.BestFeature;
-                    OPTResult.Parameters = result;
+                    OPTResult.Parameters = newFitness.BestFeature;
                     OPTResult.target = newFitness.MaxFitness;
                     OPTHistoryResult.Add(OPTResult);
                     gen++;
 
                 }
                 #endregion
+                ;
 
             }
 
 
-            return result;
+            return OPTHistoryResult.Last().Parameters;
         }
 
         #endregion
 
-
-        public Settings GA_Settings { get; set; }
+        public Settings GA_Settings;
 
         public List<double[][]> PopulationsHistory { get; }
-        public List<Fitness> FittnesHistory { get; }
+        public List<Fitness> FitnessHistory { get; }
 
-
+        
         #endregion
 
         #region Consntructors
@@ -124,6 +119,13 @@ namespace Optimization
             GA_Settings.PCrossover = pCross;
             GA_Settings.PMutation = pMutation;
             GA_Settings.Generations = generations;
+
+            PopulationsHistory = new List<double[][]>();
+            FitnessHistory = new List<Fitness>();
+
+            OPTResult = new Result();
+            OPTHistoryResult = new List<Result>();
+
         }
 
         public GeneticAlgorithm(int populationSize, List<Range> rangeFeatures, double pCross, double pMutation, Range range)
@@ -133,11 +135,22 @@ namespace Optimization
             GA_Settings.PCrossover = pCross;
             GA_Settings.PMutation = pMutation;
             GA_Settings.TargetRange = range;
+
+            PopulationsHistory = new List<double[][]>();
+            FitnessHistory = new List<Fitness>();
+
+            OPTResult = new Result();
+            OPTHistoryResult = new List<Result>();
+
         }
 
         public GeneticAlgorithm()
         {
+            PopulationsHistory = new List<double[][]>();
+            FitnessHistory = new List<Fitness>();
 
+            OPTResult = new Result();
+            OPTHistoryResult = new List<Result>();
         }
         #endregion
 
@@ -151,10 +164,12 @@ namespace Optimization
             double[][] newPopulation = new double[GA_Settings.PopulationSize][];
             for (int i = 0; i < GA_Settings.PopulationSize; i++)
             {
+                double[] aux = new double[GA_Settings.RangeFeatures.Count];
                 for (int j = 0; j < GA_Settings.RangeFeatures.Count; j++)
                 {
-                    newPopulation[i][j] = GA_Settings.RangeFeatures.ElementAt(j).MinValue + rnd.NextDouble() * (GA_Settings.RangeFeatures.ElementAt(j).MaxValue - GA_Settings.RangeFeatures.ElementAt(j).MinValue);
+                    aux[j] = GA_Settings.RangeFeatures.ElementAt(j).MinValue + rnd.NextDouble() * (GA_Settings.RangeFeatures.ElementAt(j).MaxValue - GA_Settings.RangeFeatures.ElementAt(j).MinValue);
                 }
+                newPopulation[i] = aux;
             }
             return newPopulation;
         }
@@ -232,7 +247,7 @@ namespace Optimization
 
         #endregion
 
-        public class Settings
+        public struct Settings
         {
             public int PopulationSize { get; set; }
             public List<Range> RangeFeatures { get; set; }
@@ -242,21 +257,25 @@ namespace Optimization
             public int Generations { get; set; }
         }
 
-        public class Range
+        public struct Range
         {
             public double MaxValue { get; set; }
             public double MinValue { get; set; }
         }
 
-        public  class Fitness
+        public class Fitness
         {
             public double MaxFitness { get; set; }
             public double MeanFitness { get; set; }
             public int MaxFitnessIndex { get; set; }
             public double[] BestFeature { get; set; }
             public double[] FitnessPopulation { get; set; }
-           
-
+            
+            public Fitness(int populationSize)
+            {
+                FitnessPopulation = new double[populationSize];
+            }
+            
             internal void SetFitenessData()
             {
                 MaxFitness = FitnessPopulation.Max();

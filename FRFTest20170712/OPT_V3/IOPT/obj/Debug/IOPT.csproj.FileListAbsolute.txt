@@ -12,3 +12,8 @@ C:\LAB\C#\OPT\OPT_V3\IOPT\bin\Debug\IOPT.dll
 C:\LAB\C#\OPT\OPT_V3\IOPT\bin\Debug\IOPT.pdb
 C:\LAB\C#\OPT\OPT_V3\IOPT\obj\Debug\IOPT.dll
 C:\LAB\C#\OPT\OPT_V3\IOPT\obj\Debug\IOPT.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\IOPT\bin\Debug\IOPT.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\IOPT\bin\Debug\IOPT.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\IOPT\obj\Debug\IOPT.csprojResolveAssemblyReference.cache
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\IOPT\obj\Debug\IOPT.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\IOPT\obj\Debug\IOPT.pdb

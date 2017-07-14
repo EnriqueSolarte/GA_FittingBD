@@ -25,11 +25,8 @@ namespace App_Example
 
         public void Run_OPT()
         {
-            
-            GA GA_Solver = new GA(FEM_Solver);
-            GA_Solver.Solve();
-
-            GA myGA = new GA(SecondObjFunction);
+            GeneticAlgorithm Ga = new GeneticAlgorithm();
+            Ga.Solve();
 
         }
     }

@@ -1,0 +1,10 @@
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\testingGeneticAlgorithm\bin\Debug\testingGeneticAlgorithm.exe.config
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\testingGeneticAlgorithm\bin\Debug\testingGeneticAlgorithm.exe
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\testingGeneticAlgorithm\bin\Debug\testingGeneticAlgorithm.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\testingGeneticAlgorithm\bin\Debug\GeneticAlgorithm.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\testingGeneticAlgorithm\bin\Debug\IOPT.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\testingGeneticAlgorithm\bin\Debug\GeneticAlgorithm.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\testingGeneticAlgorithm\bin\Debug\IOPT.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\testingGeneticAlgorithm\obj\Debug\testingGeneticAlgorithm.csprojResolveAssemblyReference.cache
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\testingGeneticAlgorithm\obj\Debug\testingGeneticAlgorithm.exe
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\testingGeneticAlgorithm\obj\Debug\testingGeneticAlgorithm.pdb

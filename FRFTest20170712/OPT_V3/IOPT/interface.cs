@@ -21,7 +21,7 @@ namespace Optimization
         /// return Optimal values of each variable
         /// </summary>
         /// <returns></returns>
-        double[] Solve();
+        double[] Solve(ObjectiveFunction _ObjFunc);
         
         /// <summary>
         /// record Iteration data during solving process.

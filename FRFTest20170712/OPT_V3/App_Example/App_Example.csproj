@@ -31,11 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GA">
-      <HintPath>..\GA\bin\Debug\GA.dll</HintPath>
+    <Reference Include="GeneticAlgorithm">
+      <HintPath>..\..\FRF_Form_test\GA\bin\Debug\GeneticAlgorithm.dll</HintPath>
     </Reference>
-    <Reference Include="IOPT">
-      <HintPath>..\IOPT\bin\Debug\IOPT.dll</HintPath>
+    <Reference Include="IOPT, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FRF_Form_test\GA\bin\Debug\IOPT.dll</HintPath>
     </Reference>
     <Reference Include="PSO">
       <HintPath>..\PSO\bin\Debug\PSO.dll</HintPath>

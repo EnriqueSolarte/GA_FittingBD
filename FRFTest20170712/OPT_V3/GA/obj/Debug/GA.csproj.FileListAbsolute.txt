@@ -12,3 +12,10 @@ C:\LAB\C#\OPT\OPT_V3\GA\bin\Debug\GA.dll
 C:\LAB\C#\OPT\OPT_V3\GA\bin\Debug\GA.pdb
 C:\LAB\C#\OPT\OPT_V3\GA\bin\Debug\IOPT.dll
 C:\LAB\C#\OPT\OPT_V3\GA\bin\Debug\IOPT.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA\bin\Debug\GA.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA\bin\Debug\GA.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA\bin\Debug\IOPT.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA\bin\Debug\IOPT.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA\obj\Debug\GA.csprojResolveAssemblyReference.cache
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA\obj\Debug\GA.dll
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\OPT_V3\GA\obj\Debug\GA.pdb

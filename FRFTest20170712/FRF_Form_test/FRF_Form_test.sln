@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Optimization", "GA\Optimiza
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Optimization\Interfaces.csproj", "{04BE3B2A-0620-4622-B3A4-EF952594425B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testingGeneticAlgorithm", "testingGeneticAlgorithm\testingGeneticAlgorithm.csproj", "{86908CBD-543A-49DD-9E8B-C51FC2FE2871}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,14 @@ Global
 		{04BE3B2A-0620-4622-B3A4-EF952594425B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04BE3B2A-0620-4622-B3A4-EF952594425B}.Release|x86.ActiveCfg = Release|Any CPU
 		{04BE3B2A-0620-4622-B3A4-EF952594425B}.Release|x86.Build.0 = Release|Any CPU
+		{86908CBD-543A-49DD-9E8B-C51FC2FE2871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86908CBD-543A-49DD-9E8B-C51FC2FE2871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86908CBD-543A-49DD-9E8B-C51FC2FE2871}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{86908CBD-543A-49DD-9E8B-C51FC2FE2871}.Debug|x86.Build.0 = Debug|Any CPU
+		{86908CBD-543A-49DD-9E8B-C51FC2FE2871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86908CBD-543A-49DD-9E8B-C51FC2FE2871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86908CBD-543A-49DD-9E8B-C51FC2FE2871}.Release|x86.ActiveCfg = Release|Any CPU
+		{86908CBD-543A-49DD-9E8B-C51FC2FE2871}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

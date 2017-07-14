@@ -24,20 +24,20 @@ namespace Optimization
             }
         }
 
-        ObjectiveFunction objf;
-        public ObjectiveFunction ObjFunc
-        {
-            get
-            {
-                return objf;
-                //throw new NotImplementedException();
-            }
-            set
-            {
-                objf = value;
-                //throw new NotImplementedException();
-            }
-        }
+        // ObjectiveFunction ObjFunc { get; set; }
+        //public ObjectiveFunction ObjFunc
+        //{
+        //    get
+        //    {
+        //        return objf;
+        //        //throw new NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        objf = value;
+        //        //throw new NotImplementedException();
+        //    }
+        //}
 
         Response[] responses;
         public Response[] Responses
@@ -55,8 +55,9 @@ namespace Optimization
         }
 
 
-        public double[] Solve()
+        public double[] Solve(ObjectiveFunction kike)
         {
+            
             throw new NotImplementedException();
         }
 
@@ -88,13 +89,15 @@ namespace Optimization
             }
         }
 
+        ObjectiveFunction IOPTSolver.ObjFunc { get; set; }
+
         GA_Setting Settings = new GA_Setting();
 
    
         
         public GA(ObjectiveFunction parOBJ)
         {
-
+            
         }
     }
 

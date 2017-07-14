@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E472B8FD-F2F6-4F4F-8D20-F9849F91416A}</ProjectGuid>
+    <ProjectGuid>{B44BA708-FB2B-4AE0-8248-1EF63A66F464}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Optimization</RootNamespace>
-    <AssemblyName>GeneticAlgorithm</AssemblyName>
+    <RootNamespace>AppExample</RootNamespace>
+    <AssemblyName>AppExample</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IOPT, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Optimization\bin\Debug\IOPT.dll</HintPath>
+    <Reference Include="GeneticAlgorithm">
+      <HintPath>..\GA\bin\Debug\GeneticAlgorithm.dll</HintPath>
+    </Reference>
+    <Reference Include="IOPT">
+      <HintPath>..\GA\bin\Debug\IOPT.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeneticAlgorithm.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,6 +8,7 @@ namespace Optimization
 {
     public interface IOptimization
     {           
+
         double[] Solve(ObjectiveFunction ObjFun);
 
         Result OPTResult { get; set; }
