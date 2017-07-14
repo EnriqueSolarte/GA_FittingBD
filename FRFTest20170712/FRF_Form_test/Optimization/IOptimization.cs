@@ -17,11 +17,10 @@ namespace Optimization
 
     public delegate double ObjectiveFunction(double[] parameters);
 
-    public struct Result
+    public class Result
     {
-        public double[] Parameters;
-        public double[] Responses;
-        public double OBJ;
+        public double[] Parameters { get; set; }
+        public double target { get; set; }
     }
 
    

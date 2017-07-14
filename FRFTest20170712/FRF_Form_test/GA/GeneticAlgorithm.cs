@@ -44,7 +44,9 @@ namespace Optimization
                 #endregion
 
                 int gen = 0;
-                while(GA_Settings.Generations <= gen)
+
+                #region While Loop for Genereations
+                while (GA_Settings.Generations <= gen)
                 {
                     double[][] currentPopulation = PopulationsHistory.Last();
                     Fitness currentFitness = new Fitness();
@@ -87,13 +89,18 @@ namespace Optimization
 
                     PopulationsHistory.Add(newPopulation);
                     FittnesHistory.Add(newFitness);
-              
+
+                    result = newFitness.BestFeature;
+                    OPTResult.Parameters = result;
+                    OPTResult.target = newFitness.MaxFitness;
+                    OPTHistoryResult.Add(OPTResult);
                     gen++;
 
                 }
-               
+                #endregion
 
             }
+
 
             return result;
         }
@@ -105,6 +112,7 @@ namespace Optimization
 
         public List<double[][]> PopulationsHistory { get; }
         public List<Fitness> FittnesHistory { get; }
+
 
         #endregion
 
