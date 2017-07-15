@@ -26,7 +26,7 @@ namespace App_Example
         public void Run_OPT()
         {
             GeneticAlgorithm Ga = new GeneticAlgorithm();
-            Ga.Solve();
+            Ga.Solve(FEM_Solver);
 
         }
     }

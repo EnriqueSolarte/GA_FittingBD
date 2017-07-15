@@ -45,28 +45,20 @@ namespace Optimization
                 #region While Loop for Genereations
                 while (GA_Settings.Generations <= gen)
                 {
-                    double[][] currentPopulation = new double[GA_Settings.PopulationSize][];
-                    currentPopulation = PopulationsHistory.Last();
+                    double[][] currentPopulation = PopulationsHistory.Last();
+                    Fitness currentFitness = FitnessHistory[gen];
 
                     double[][] newPopulation = new double[GA_Settings.PopulationSize][];
-
-                    Fitness currentFitness = new Fitness(GA_Settings.PopulationSize);
                     Fitness newFitness = new Fitness(GA_Settings.PopulationSize);
 
-
-                    for (int i = 0; i < GA_Settings.PopulationSize; i++)
-                    {
-                        currentFitness.FitnessPopulation[i] = ObjFunc(currentPopulation[i]);
-                    }
-                    currentFitness.SetFitenessData();
-                    currentFitness.BestFeature = currentPopulation[currentFitness.MaxFitnessIndex];
-
-
+                    #region GA
                     newPopulation = Selection(currentPopulation, currentFitness.FitnessPopulation);
                     newPopulation[0] = currentFitness.BestFeature;
                     newPopulation = Crossover(newPopulation);
                     newPopulation = Mutation(newPopulation);
-                  
+                    #endregion
+
+
                     for (int i = 0; i < GA_Settings.PopulationSize; i++)
                     {
                         newFitness.FitnessPopulation[i] = ObjFunc(newPopulation[i]);

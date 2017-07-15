@@ -24,19 +24,19 @@ namespace testingGeneticAlgorithm
     {
         private double myObjFunction_B(double[] parameters)
         {
-            return (Math.Exp(parameters[1] + 5 * parameters[0]) + 100 * parameters[3]) / (parameters[2]);
+            return (Math.Exp(parameters[1] + 5 * parameters[0]) + 100 * parameters[3]) / (Math.Exp(parameters[1] * parameters[2]));
         }
 
         public void RunSolution()
         {
             List<GeneticAlgorithm.Range> FeactureRange= new List<GeneticAlgorithm.Range>();
             FeactureRange.Clear();
-            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 10 });
-            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 20 });
-            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0.1, MaxValue = 0.5 });
-            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0.001, MaxValue = 0.1 });
+            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 100 });
+            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 200 });
+            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0.1, MaxValue = 100 });
+            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0.001, MaxValue = 120});
 
-            GeneticAlgorithm GA_1 = new GeneticAlgorithm(100, FeactureRange, 0.9, 0.01, new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 10 });
+            GeneticAlgorithm GA_1 = new GeneticAlgorithm(1000, FeactureRange, 0.9, 0.9, new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 10 });
             GA_1.Solve(myObjFunction_B);
             
         }
