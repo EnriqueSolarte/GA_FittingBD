@@ -37,6 +37,7 @@ namespace testingGeneticAlgorithm
             FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0.001, MaxValue = 120});
 
             GeneticAlgorithm GA_1 = new GeneticAlgorithm(1000, FeactureRange, 0.9, 0.9, new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 10 });
+            GA_1.GA_Settings.Generations = 100;
             GA_1.Solve(myObjFunction_B);
             
         }

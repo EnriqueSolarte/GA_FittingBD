@@ -11,9 +11,9 @@ namespace Optimization
 
         double[] Solve(ObjectiveFunction ObjFun);
 
-        Result OPTResult { get; set; }
+        Result OPTResult { get;  }
 
-        List<Result> OPTHistoryResult { get; set; }
+        List<Result> OPTHistoryResult { get;}
     }
 
     public delegate double ObjectiveFunction(double[] parameters);

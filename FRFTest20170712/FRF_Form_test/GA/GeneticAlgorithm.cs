@@ -13,8 +13,8 @@ namespace Optimization
 
         #region Interface properties
 
-        public Result OPTResult { get; set; }
-        public List<Result> OPTHistoryResult { get; set; }
+        public Result OPTResult { get; }
+        public List<Result> OPTHistoryResult { get; }
         public double[] Solve(ObjectiveFunction ObjFunc)
         {
             if (Validation())
@@ -35,25 +35,32 @@ namespace Optimization
                 }
 
                 initialFitness.SetFitenessData();
-                initialFitness.BestFeature = initilaPopulation[initialFitness.MaxFitnessIndex];
+                         
+                initialFitness.BestFeature = (double[])initilaPopulation[initialFitness.MaxFitnessIndex].Clone(); ;
                 FitnessHistory.Add(initialFitness);
+
+                OPTHistoryResult.Add(new Result
+                {
+                    Parameters = (double[])initialFitness.BestFeature.Clone(),
+                    target = initialFitness.MaxFitness
+                });
 
                 #endregion
 
                 int gen = 0;
 
                 #region While Loop for Genereations
-                while (GA_Settings.Generations <= gen)
+                while (gen < GA_Settings.Generations-1)
                 {
                     double[][] currentPopulation = PopulationsHistory.Last();
-                    Fitness currentFitness = FitnessHistory[gen];
+                    Fitness currentFitness = FitnessHistory.Last();
 
                     double[][] newPopulation = new double[GA_Settings.PopulationSize][];
                     Fitness newFitness = new Fitness(GA_Settings.PopulationSize);
 
                     #region GA
                     newPopulation = Selection(currentPopulation, currentFitness.FitnessPopulation);
-                    newPopulation[0] = currentFitness.BestFeature;
+                    newPopulation[0] = (double[])currentFitness.BestFeature.Clone();
                     newPopulation = Crossover(newPopulation);
                     newPopulation = Mutation(newPopulation);
                     #endregion
@@ -63,13 +70,15 @@ namespace Optimization
                     {
                         newFitness.FitnessPopulation[i] = ObjFunc(newPopulation[i]);
                     }
+
                     newFitness.SetFitenessData();
-                    newFitness.BestFeature = newPopulation[newFitness.MaxFitnessIndex];
+                    newFitness.BestFeature = (double[])newPopulation[newFitness.MaxFitnessIndex].Clone();
 
                     #region Saving Best fearture  NEW Vs CURRENT
                     if (newFitness.MaxFitness <= currentFitness.MaxFitness)
                     { 
-                        newPopulation[0] = newFitness.BestFeature = currentFitness.BestFeature;
+                        newPopulation[0] = (double[]) currentFitness.BestFeature.Clone();
+                        newFitness.BestFeature = (double[])currentFitness.BestFeature.Clone();
                         newFitness.FitnessPopulation[0] = currentFitness.MaxFitness;
                         newFitness.SetFitenessData();
                     }
@@ -78,14 +87,20 @@ namespace Optimization
                     PopulationsHistory.Add(newPopulation);
                     FitnessHistory.Add(newFitness);
 
-                    OPTResult.Parameters = newFitness.BestFeature;
-                    OPTResult.target = newFitness.MaxFitness;
-                    OPTHistoryResult.Add(OPTResult);
+                    
+                    OPTHistoryResult.Add(new Result
+                    {
+                        Parameters = (double[])newFitness.BestFeature.Clone(),
+                        target = newFitness.MaxFitness
+                    });
+
                     gen++;
 
                 }
                 #endregion
-                ;
+
+                OPTResult.Parameters = OPTHistoryResult.Last().Parameters;
+                OPTResult.target = OPTHistoryResult.Last().target;
 
             }
 
@@ -95,7 +110,7 @@ namespace Optimization
 
         #endregion
 
-        public Settings GA_Settings;
+        public Settings GA_Settings { get; set; }
 
         public List<double[][]> PopulationsHistory { get; }
         public List<Fitness> FitnessHistory { get; }
@@ -106,6 +121,7 @@ namespace Optimization
         #region Consntructors
         public GeneticAlgorithm(int populationSize, List<Range> rangeFeatures, double pCross, double pMutation, int generations)
         {
+            GA_Settings = new Settings();
             GA_Settings.PopulationSize = populationSize;
             GA_Settings.RangeFeatures = rangeFeatures;
             GA_Settings.PCrossover = pCross;
@@ -122,6 +138,7 @@ namespace Optimization
 
         public GeneticAlgorithm(int populationSize, List<Range> rangeFeatures, double pCross, double pMutation, Range range)
         {
+            GA_Settings = new Settings();
             GA_Settings.PopulationSize = populationSize;
             GA_Settings.RangeFeatures = rangeFeatures;
             GA_Settings.PCrossover = pCross;
@@ -138,6 +155,8 @@ namespace Optimization
 
         public GeneticAlgorithm()
         {
+            GA_Settings = new Settings();
+
             PopulationsHistory = new List<double[][]>();
             FitnessHistory = new List<Fitness>();
 
@@ -186,7 +205,8 @@ namespace Optimization
 
                     if (j == GA_Settings.PopulationSize) j = 0;
                 }
-                selectedPopulation[i] = currentPopulation[j];
+               
+                selectedPopulation[i] = (double[])currentPopulation[j].Clone(); ; 
             }
 
             return selectedPopulation;
@@ -239,7 +259,7 @@ namespace Optimization
 
         #endregion
 
-        public struct Settings
+        public class Settings
         {
             public int PopulationSize { get; set; }
             public List<Range> RangeFeatures { get; set; }
@@ -276,6 +296,7 @@ namespace Optimization
             }
 
         }
+
 
     }
 
