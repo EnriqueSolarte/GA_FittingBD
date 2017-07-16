@@ -13,7 +13,8 @@ namespace testingGeneticAlgorithm
         
         static void Main(string[] args)
         {
-            TableOptimization A = new TableOptimization();
+            functionOptimization A = new functionOptimization();
+            A.target_A = A.myFuction_A(new double[] { 15, 12, 0.35, 0.05 });
             A.RunSolution();
             
         }    
@@ -46,7 +47,7 @@ namespace testingGeneticAlgorithm
 
     public class functionOptimization
     {
-        double[][] target_A;
+        public double[][] target_A { get; set; }
 
         public double[][] myFuction_A(double[] parameters)
         {
@@ -64,7 +65,7 @@ namespace testingGeneticAlgorithm
             return result;
         }
 
-        public double myObjFunction_A(double[] parameters)
+        private double myObjFunction_A(double[] parameters)
         {
             double error = double.MaxValue;
 
@@ -77,20 +78,20 @@ namespace testingGeneticAlgorithm
             }
 
             error = LocalError.Sum();
-            return error;
+            return 0.01/error;
         }
 
         public void RunSolution()
         {
             List<GeneticAlgorithm.Range> FeactureRange = new List<GeneticAlgorithm.Range>();
             FeactureRange.Clear();
-            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 10 });
-            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 20 });
-            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0.1, MaxValue = 0.5 });
-            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0.001, MaxValue = 0.1 });
+            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 30 });
+            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 30 });
+            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0.1, MaxValue = 1.5 });
+            FeactureRange.Add(new GeneticAlgorithm.Range { MinValue = 0.001, MaxValue = 1 });
 
-            GeneticAlgorithm GA_1 = new GeneticAlgorithm(100, FeactureRange, 0.9, 0.01, new GeneticAlgorithm.Range { MinValue = 0, MaxValue = 10 });
-            target_A = myFuction_A(new double[] {15,12,0.35,0.05});
+            GeneticAlgorithm GA_1 = new GeneticAlgorithm(100, FeactureRange, 0.9, 0.9, new GeneticAlgorithm.Range { MinValue = 8, MaxValue = 10});
+            
             GA_1.Solve(myObjFunction_A);
         }
     }

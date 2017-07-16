@@ -50,7 +50,7 @@ namespace Optimization
                 int gen = 0;
 
                 #region While Loop for Genereations
-                while (gen < GA_Settings.Generations-1)
+                while (gen < GA_Settings.Generations-1 && !(FitnessHistory.Last().MaxFitness > GA_Settings.TargetRange.MinValue && FitnessHistory.Last().MaxFitness < GA_Settings.TargetRange.MaxValue))
                 {
                     double[][] currentPopulation = PopulationsHistory.Last();
                     Fitness currentFitness = FitnessHistory.Last();
@@ -127,6 +127,7 @@ namespace Optimization
             GA_Settings.PCrossover = pCross;
             GA_Settings.PMutation = pMutation;
             GA_Settings.Generations = generations;
+            GA_Settings.TargetRange = new Range { MinValue = 0, MaxValue = 0 };
 
             PopulationsHistory = new List<double[][]>();
             FitnessHistory = new List<Fitness>();
@@ -144,6 +145,7 @@ namespace Optimization
             GA_Settings.PCrossover = pCross;
             GA_Settings.PMutation = pMutation;
             GA_Settings.TargetRange = range;
+            GA_Settings.Generations = 100;
 
             PopulationsHistory = new List<double[][]>();
             FitnessHistory = new List<Fitness>();
@@ -156,6 +158,8 @@ namespace Optimization
         public GeneticAlgorithm()
         {
             GA_Settings = new Settings();
+            GA_Settings.TargetRange = new Range { MinValue = 0, MaxValue = 0 };
+            GA_Settings.Generations = 100;
 
             PopulationsHistory = new List<double[][]>();
             FitnessHistory = new List<Fitness>();
