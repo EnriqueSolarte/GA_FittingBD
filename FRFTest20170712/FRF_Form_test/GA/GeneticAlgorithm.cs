@@ -28,10 +28,10 @@ namespace Optimization
                 PopulationsHistory.Add(initilaPopulation);
 
                 Fitness initialFitness = new Fitness(GA_Settings.PopulationSize);
-                for (int i = 0; i < GA_Settings.PopulationSize; i++)
+                Parallel.For(0, GA_Settings.PopulationSize, i =>
                 {
                     initialFitness.FitnessPopulation[i] = ObjFunc(initilaPopulation[i]);
-                }
+                });
 
                 initialFitness.SetFitenessData();
                          
@@ -64,10 +64,11 @@ namespace Optimization
                     #endregion
 
                     Fitness newFitness = new Fitness(GA_Settings.PopulationSize);
-                    for (int i = 0; i < GA_Settings.PopulationSize; i++)
+                    Parallel.For(0, GA_Settings.PopulationSize, i =>
                     {
                         newFitness.FitnessPopulation[i] = ObjFunc(newPopulation[i]);
-                    }
+                    });
+
                     newFitness.SetFitenessData();
                     newFitness.BestFeature = (double[])newPopulation[newFitness.MaxFitnessIndex].Clone();
 
@@ -194,22 +195,22 @@ namespace Optimization
 
             double[][] selectedPopulation = new double[GA_Settings.PopulationSize][];
 
-            for (int i = 0; i < GA_Settings.PopulationSize; i++)
-            {
-                double test = rnd.NextDouble() * sumatoryFitness;
-                double partSum = currentFitness[0];
-                int j = 0;
+            Parallel.For(0, GA_Settings.PopulationSize, i =>
+             {
+                 double test = rnd.NextDouble() * sumatoryFitness;
+                 double partSum = currentFitness[0];
+                 int j = 0;
 
-                while (partSum < test)
-                {
-                    partSum = partSum + currentFitness[j + 1];
-                    j++;
+                 while (partSum < test)
+                 {
+                     partSum = partSum + currentFitness[j + 1];
+                     j++;
 
-                    if (j == GA_Settings.PopulationSize) j = 0;
-                }
-               
-                selectedPopulation[i] = (double[])currentPopulation[j].Clone(); ; 
-            }
+                     if (j == GA_Settings.PopulationSize) j = 0;
+                 }
+
+                 selectedPopulation[i] = (double[])currentPopulation[j].Clone(); ;
+             });
 
             return selectedPopulation;
         }
@@ -219,18 +220,18 @@ namespace Optimization
             Random rnd = new Random();
             double[][] selectedPopulation = (double[][])currentPopulation.Clone();
 
-            for (int i = 0; i < GA_Settings.PopulationSize; i = i + 2)
-            {
-                if (rnd.NextDouble() <= GA_Settings.PCrossover)
-                {
-                    for (int j = 0; j < GA_Settings.RangeFeatures.Count; j++)
-                    {
-                        double aux = rnd.NextDouble();
-                        selectedPopulation[i][j] = (1 - aux) * currentPopulation[i][j] + aux * currentPopulation[i + 1][j];
-                        selectedPopulation[i + 1][j] = aux * currentPopulation[i][j] + (1 - aux) * currentPopulation[i + 1][j];
-                    }
-                }
-            }
+            Parallel.For(0, (int)GA_Settings.PopulationSize / 2, i =>
+              {
+                  if (rnd.NextDouble() <= GA_Settings.PCrossover)
+                  {
+                      for (int j = 0; j < GA_Settings.RangeFeatures.Count; j++)
+                      {
+                          double aux = rnd.NextDouble();
+                          selectedPopulation[i][j] = (1 - aux) * currentPopulation[i][j] + aux * currentPopulation[i + 1][j];
+                          selectedPopulation[i + 1][j] = aux * currentPopulation[i][j] + (1 - aux) * currentPopulation[i + 1][j];
+                      }
+                  }
+              });
             return selectedPopulation;
         }
 
@@ -239,7 +240,7 @@ namespace Optimization
             Random rnd = new Random();
             double[][] selectedPopulation = (double[][])currentPopulation.Clone();
 
-            for (int i = 0; i < GA_Settings.PopulationSize; i++)
+            Parallel.For(0, GA_Settings.PopulationSize, i =>
             {
                 if (rnd.NextDouble() <= GA_Settings.PMutation)
                 {
@@ -248,7 +249,7 @@ namespace Optimization
                         selectedPopulation[i][j] = GA_Settings.RangeFeatures.ElementAt(j).MinValue + rnd.NextDouble() * (GA_Settings.RangeFeatures.ElementAt(j).MaxValue - GA_Settings.RangeFeatures.ElementAt(j).MinValue);
                     }
                 }
-            }
+            });
 
             return selectedPopulation;
         }

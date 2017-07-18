@@ -6,6 +6,7 @@ using Mechatronics.MSMObject;
 using Mechatronics.Analysis;
 using Optimization;
 using System;
+using System.Threading.Tasks;
 
 namespace FRF_Form_test
 {
@@ -190,7 +191,7 @@ namespace FRF_Form_test
                 SetReference(VClose_ref, VR, InitialModes);
                 List<Mode> result = new List<Mode>();
 
-                for(int i=0; i < FrequencyRange.Count; i++)
+                Parallel.For(0, FrequencyRange.Count, i =>
                 {
                     RangeStatus = i;
                     GA[i].Solve(ObjFunction);
@@ -200,7 +201,7 @@ namespace FRF_Form_test
                     _Mode.Mass = BestParameters[0];
                     _Mode.Zeta = BestParameters[1];
                     result.Add(_Mode);
-                }
+                });
                
                 return result;
             }
@@ -216,9 +217,8 @@ namespace FRF_Form_test
                 mode.Mass = parameters[0];
                 mode.Zeta = parameters[1];
 
-                VLoopModes = InitialModes;
-                VLoopModes.RemoveAt(RangeStatus);    
-                VLoopModes.Insert(RangeStatus,mode);
+                VLoopModes = InitialModes;  
+                VLoopModes[RangeStatus] = mode;
                 
                 VR.VLoopModes = VLoopModes;
                 FRF[] Eval = VR.SolveCloseLoopResponse();
@@ -227,7 +227,7 @@ namespace FRF_Form_test
 
                 double Error = 0;
                 double LocalError = 0;
-                for (int i = 0; i < RegionEval[RangeStatus].Length; i++)
+                 for (int i = 0; i < RegionEval[RangeStatus].Length; i++)
                 {
                     LocalError = Math.Abs(Target[RangeStatus][i].Mag - RegionEval[RangeStatus][i].Mag)+LocalError;
                 }
