@@ -13,95 +13,56 @@ namespace FRF_Form_test
 {
     public partial class Form1 : Form
     {
+        FRF[] VClose_ref;
+        VelocityResponse VR;
+        FittingOptimization FittingOPT;
+
         public Form1()
         {
             InitializeComponent();
-        
+
             //Function object
-            VelocityResponse VR = new VelocityResponse();
-            
+            VR = new VelocityResponse();
+
             //Set experiment Control Parameters (C controller)
             Parameters P = new Parameters();
             SetParameters(P);
             VR.P = P;
 
             //Defining target, read FRF file from csv file, which is created by servoguide
-            FRF[] VClose_ref = VR.ReadServoGuide_FRFdata_csv("Frequency_Response_Axis-1_1_-_1000Hz.csv");
+            VClose_ref = VR.ReadServoGuide_FRFdata_csv("Frequency_Response_Axis-1_1_-_1000Hz.csv");
             VR.IsFreqDataSameAsRef = true;
-
-            List<Mode> VLoopModes = new List<Mode>();
-            CreateModes(VLoopModes);
-
-            #region Defining Optimation
-
-            #region Setting Data
-
-            GeneticAlgorithm.Range Mass_range = new GeneticAlgorithm.Range { MinValue = 0.0001, MaxValue = 1 };
-            GeneticAlgorithm.Range Zeta_range = new GeneticAlgorithm.Range { MinValue = 0.01, MaxValue = 0.1 };
-
-            List<GeneticAlgorithm.Range> FrequencyRange = new List<GeneticAlgorithm.Range>();
-            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 50, MaxValue = 80 });
-            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 110, MaxValue = 250 });
-            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 300, MaxValue = 400 });
-            #endregion
-            
-            FittingOptimization FittingOPT = new FittingOptimization(Mass_range, Zeta_range,FrequencyRange);
-            
-            FittingOPT.SetOptimizationParameters(100,0.9,0.9,100, 1);
-          
-            FittingOPT.SetReference(VClose_ref, VR, VLoopModes);
-
-            VLoopModes = new List<Mode>();
-            VLoopModes = FittingOPT.Solve();
-
-
-            #endregion
-
-            //Create Structure Nature Modes Object
-           
-            VR.VLoopModes = VLoopModes;
-
-            //Evaluation
-            FRF[] Close = VR.SolveCloseLoopResponse();
-            //FRF[] Open = VR.SolveOpenLoopResponse();
-
-            // draw referance FRF in chart
             DrawLine(VClose_ref, 0);
-            // draw simulated FRF in chart
-            DrawLine(Close, 1);
 
         }
 
-       
-        
-
-    #region Fixed Parameters
+        #region Fixed Code
 
         void CreateModes(List<Mode> VLoopModes)
-    {
+        {
 
-        Mode mode;
+            Mode mode;
 
-        mode = new Mode();
-        mode.Freq = 55;
-        mode.Zeta = 0.1;
-        mode.Mass = 0.3;
-        VLoopModes.Add(mode);
+            mode = new Mode();
+            mode.Freq = 55;
+            mode.Zeta = 0.1;
+            mode.Mass = 0.3;
+            VLoopModes.Add(mode);
 
 
-        mode = new Mode();
-        mode.Freq = 120;
-        mode.Zeta = 0.07;
-        mode.Mass = 0.1;
-        VLoopModes.Add(mode);
+            mode = new Mode();
+            mode.Freq = 120;
+            mode.Zeta = 0.07;
+            mode.Mass = 0.1;
+            VLoopModes.Add(mode);
 
-        mode = new Mode();
-        mode.Freq = 315;
-        mode.Zeta = 0.1;
-        mode.Mass = 0.05;
-        VLoopModes.Add(mode);
+            mode = new Mode();
+            mode.Freq = 315;
+            mode.Zeta = 0.1;
+            mode.Mass = 0.05;
+            VLoopModes.Add(mode);
 
-    }
+        }
         void SetParameters(Parameters P)
         {//value is from *.prm file (ServoGuide Parameter file)
             P.FANUCs.HRVGain = 300;
@@ -123,8 +84,8 @@ namespace FRF_Form_test
             P.ConvertFUNUCParamters();
 
         }
-        #endregion
-        
+
+
         void DrawLine(FRF[] FRFData, int Channel)
         {
             //X AXIS in log scale
@@ -143,7 +104,17 @@ namespace FRF_Form_test
             }
 
         }
+        private void InformationTipEvent(object sender, System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs e)
+        {
+            if (e.HitTestResult.ChartElementType == ChartElementType.DataPoint)
+            {
+                DataPoint myPoint = (DataPoint)(e.HitTestResult.Object);
+                e.Text = "X value: " + myPoint.XValue + Environment.NewLine;
+                e.Text += "Y value: " + myPoint.YValues[0] + Environment.NewLine;
+            }
+        }
 
+        #endregion
 
         #region Fitting OPT
         private class FittingOptimization
@@ -152,16 +123,16 @@ namespace FRF_Form_test
             public List<GeneticAlgorithm> GA { get; set; }
             public VelocityResponse VR { get; set; }
             public FRF[] VClose_ref { get; set; }
-            public double Sensibility { get;  set; }
+            public double Sensibility { get; set; }
 
             private GeneticAlgorithm.Range Mass_range;
-            private GeneticAlgorithm.Range Zeta_range;          
+            private GeneticAlgorithm.Range Zeta_range;
             private List<GeneticAlgorithm.Range> Features; // internal Varaiable to GA
             private List<FRF[]> Target;
 
             private List<Mode> InitialModes;
             private int RangeStatus;
-       
+
 
             public FittingOptimization(GeneticAlgorithm.Range mass_range, GeneticAlgorithm.Range zeta_range, List<GeneticAlgorithm.Range> frequencyRange)
             {
@@ -169,14 +140,14 @@ namespace FRF_Form_test
                 Zeta_range = zeta_range;
                 FrequencyRange = frequencyRange;
 
-            } 
+            }
 
             public void SetOptimizationParameters(int population, double pcross, double pmutation, int generations, double sensibility)
             {
                 GA = new List<GeneticAlgorithm>();
 
                 Sensibility = sensibility;
-                for (int i=0; i < FrequencyRange.Count; i++)
+                for (int i = 0; i < FrequencyRange.Count; i++)
                 {
                     GeneticAlgorithm _GA;
                     Features = new List<GeneticAlgorithm.Range>();
@@ -187,8 +158,8 @@ namespace FRF_Form_test
                     GA.Add(_GA);
                 }
 
-               
-               
+
+
 
             }
 
@@ -208,13 +179,13 @@ namespace FRF_Form_test
                     _Mode.Zeta = BestParameters[1];
                     result.Add(_Mode);
                 });
-               
+
                 return result;
             }
 
             private double ObjFunction(double[] parameters)
             {
-                
+
                 List<Mode> VLoopModes = new List<Mode>();
 
                 Mode mode = new Mode();
@@ -223,9 +194,9 @@ namespace FRF_Form_test
                 mode.Mass = parameters[0];
                 mode.Zeta = parameters[1];
 
-                VLoopModes = InitialModes;  
+                VLoopModes = InitialModes;
                 VLoopModes[RangeStatus] = mode;
-                
+
                 VR.VLoopModes = VLoopModes;
                 FRF[] Eval = VR.SolveCloseLoopResponse();
                 List<FRF[]> RegionEval = GettingRegionReference(Eval);
@@ -233,16 +204,16 @@ namespace FRF_Form_test
 
                 double Error = 0;
                 double LocalError = 0;
-                 for (int i = 0; i < RegionEval[RangeStatus].Length; i++)
+                for (int i = 0; i < RegionEval[RangeStatus].Length; i++)
                 {
-                    LocalError = Math.Abs(Target[RangeStatus][i].Mag - RegionEval[RangeStatus][i].Mag)+LocalError;
+                    LocalError = Math.Abs(Target[RangeStatus][i].Mag - RegionEval[RangeStatus][i].Mag) + LocalError;
                 }
                 Error = Error + LocalError;
-                
-                return Sensibility/Error;
+
+                return Sensibility / Error;
             }
 
-            public void SetReference(FRF[] vClose_ref, VelocityResponse vR, List<Mode> initialModes )
+            public void SetReference(FRF[] vClose_ref, VelocityResponse vR, List<Mode> initialModes)
             {
                 VClose_ref = vClose_ref;
                 VR = vR;
@@ -250,7 +221,7 @@ namespace FRF_Form_test
                 Target = GettingRegionReference(vClose_ref);
 
                 InitialModes = initialModes;
-                               
+
             }
 
             private List<FRF[]> GettingRegionReference(FRF[] vClose_ref)
@@ -259,7 +230,7 @@ namespace FRF_Form_test
                 for (int i = 0; i < FrequencyRange.Count; i++)
                 {
                     List<FRF> aux = new List<FRF>();
-                   
+
                     for (int data = 0; data < vClose_ref.Length; data++)
                     {
                         if (vClose_ref[data].Freq >= FrequencyRange[i].MinValue && vClose_ref[data].Freq <= FrequencyRange[i].MaxValue)
@@ -278,14 +249,51 @@ namespace FRF_Form_test
 
         #endregion
 
-        private void InformationTipEvent(object sender, System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs e)
+        private void GeneticAlgorithmOptimization()
         {
-            if (e.HitTestResult.ChartElementType == ChartElementType.DataPoint)
-            {
-                DataPoint myPoint = (DataPoint)(e.HitTestResult.Object);
-                e.Text = "X value: " + myPoint.XValue + Environment.NewLine;
-                e.Text += "Y value: " + myPoint.YValues[0] + Environment.NewLine;
-            }
+            List<Mode> VLoopModes = new List<Mode>();
+            CreateModes(VLoopModes);
+
+            GeneticAlgorithm.Range Mass_range = new GeneticAlgorithm.Range { MinValue = 0.0001, MaxValue = 1 };
+            GeneticAlgorithm.Range Zeta_range = new GeneticAlgorithm.Range { MinValue = 0.01, MaxValue = 0.5 };
+
+            List<GeneticAlgorithm.Range> FrequencyRange = new List<GeneticAlgorithm.Range>();
+            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 50, MaxValue = 70 });
+            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 110, MaxValue = 190 });
+            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 270, MaxValue = 620 });
+
+            FittingOPT = new FittingOptimization(Mass_range, Zeta_range, FrequencyRange);
+
+            FittingOPT.SetOptimizationParameters(20, 1, 0.9, 500, 20);
+
+            FittingOPT.SetReference(VClose_ref, VR, VLoopModes);
+
+            VLoopModes = new List<Mode>();
+            VLoopModes = FittingOPT.Solve();
+
+            //Create Structure Nature Modes Object
+
+            VR.VLoopModes = VLoopModes;
+
+            //Evaluation
+            FRF[] Close = VR.SolveCloseLoopResponse();
+            //FRF[] Open = VR.SolveOpenLoopResponse();
+
+            // draw simulated FRF in chart
+            DrawLine(Close, 1);
+        }
+
+        private void FittingCurveBtnEvent(object sender, EventArgs e)
+        {
+            buttonCreateFiittingCurve.Enabled = false;
+            GeneticAlgorithmOptimization();          
+            buttonCreateFiittingCurve.Enabled = true;
+            buttonOptimizationOptions.Enabled = true;
+        }
+
+        private void GeneticAlgorithmOptionsBntEvent(object sender, EventArgs e)
+        {
+
         }
     }
 
