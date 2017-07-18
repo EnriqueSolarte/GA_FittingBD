@@ -21,7 +21,7 @@ namespace Optimization
     public class Result
     {
         public double[] Parameters { get; set; }
-        public double target { get; set; }
+        public double[] target { get; set; }
     }
 
    

@@ -37,6 +37,9 @@
     <Reference Include="GeneticAlgorithm">
       <HintPath>..\GA\bin\Debug\GeneticAlgorithm.dll</HintPath>
     </Reference>
+    <Reference Include="IOPT">
+      <HintPath>..\GA\bin\Debug\IOPT.dll</HintPath>
+    </Reference>
     <Reference Include="Mechatronics">
       <HintPath>..\..\Mechatronics Solution\Mechatronics\bin\Debug\Mechatronics.dll</HintPath>
     </Reference>

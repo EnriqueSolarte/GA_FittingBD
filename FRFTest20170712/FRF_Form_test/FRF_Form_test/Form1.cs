@@ -1,24 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
-
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using System.Xml;
 
 using Mechatronics.MathToolBox;
 using Mechatronics.MSMObject;
 using Mechatronics.Analysis;
 using Optimization;
-
-
+using System;
 
 namespace FRF_Form_test
 {
@@ -38,30 +25,43 @@ namespace FRF_Form_test
 
             //Defining target, read FRF file from csv file, which is created by servoguide
             FRF[] VClose_ref = VR.ReadServoGuide_FRFdata_csv("Frequency_Response_Axis-1_1_-_1000Hz.csv");
+            VR.IsFreqDataSameAsRef = true;
 
-            //GA Definition
-            GeneticAlgorithm GA = new GeneticAlgorithm();
-
-            
-             
-            //VLoopModes creation by population
-            
-            //Create Structure Nature Modes Object
             List<Mode> VLoopModes = new List<Mode>();
             CreateModes(VLoopModes);
+
+            #region Defining Optimation
+
+            #region Setting Data
+
+            GeneticAlgorithm.Range Mass_range = new GeneticAlgorithm.Range { MinValue = 0.0001, MaxValue = 1 };
+            GeneticAlgorithm.Range Zeta_range = new GeneticAlgorithm.Range { MinValue = 0.01, MaxValue = 0.1 };
+
+            List<GeneticAlgorithm.Range> FrequencyRange = new List<GeneticAlgorithm.Range>();
+            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 50, MaxValue = 80 });
+            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 110, MaxValue = 250 });
+            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 300, MaxValue = 400 });
+            #endregion
+            
+            FittingOptimization FittingOPT = new FittingOptimization(Mass_range, Zeta_range,FrequencyRange);
+            
+            FittingOPT.SetOptimizationParameters(100,0.9,0.9,100, 1);
+          
+            FittingOPT.SetReference(VClose_ref, VR, VLoopModes);
+
+            VLoopModes = new List<Mode>();
+            VLoopModes = FittingOPT.Solve();
+
+
+            #endregion
+
+            //Create Structure Nature Modes Object
+           
             VR.VLoopModes = VLoopModes;
 
             //Evaluation
             FRF[] Close = VR.SolveCloseLoopResponse();
-            FRF[] Open = VR.SolveOpenLoopResponse();
-
-            //Grading
-            
-            //Selection
-            //Crossovewr
-            //Mutation
-            //Reassignation
-            
+            //FRF[] Open = VR.SolveOpenLoopResponse();
 
             // draw referance FRF in chart
             DrawLine(VClose_ref, 0);
@@ -69,7 +69,6 @@ namespace FRF_Form_test
             DrawLine(Close, 1);
 
         }
-        
 
         void CreateModes(List<Mode> VLoopModes)
         {
@@ -120,7 +119,6 @@ namespace FRF_Form_test
             P.ConvertFUNUCParamters();
 
         }
-
         void DrawLine(FRF[] FRFData, int Channel)
         {
             //X AXIS in log scale
@@ -139,7 +137,142 @@ namespace FRF_Form_test
             }
 
         }
-        #endregion   
+        #endregion
 
+        private class FittingOptimization
+        {
+            public List<GeneticAlgorithm.Range> FrequencyRange { get; set; }
+            public List<GeneticAlgorithm> GA { get; set; }
+            public VelocityResponse VR { get; set; }
+            public FRF[] VClose_ref { get; set; }
+            public double Sensibility { get;  set; }
+
+            private GeneticAlgorithm.Range Mass_range;
+            private GeneticAlgorithm.Range Zeta_range;          
+            private List<GeneticAlgorithm.Range> Features; // internal Varaiable to GA
+            private List<FRF[]> Target;
+
+            private List<Mode> InitialModes;
+            private int RangeStatus;
+       
+
+            public FittingOptimization(GeneticAlgorithm.Range mass_range, GeneticAlgorithm.Range zeta_range, List<GeneticAlgorithm.Range> frequencyRange)
+            {
+                Mass_range = mass_range;
+                Zeta_range = zeta_range;
+                FrequencyRange = frequencyRange;
+
+            } 
+
+            public void SetOptimizationParameters(int population, double pcross, double pmutation, int generations, double sensibility)
+            {
+                GA = new List<GeneticAlgorithm>();
+
+                Sensibility = sensibility;
+                for (int i=0; i < FrequencyRange.Count; i++)
+                {
+                    GeneticAlgorithm _GA;
+                    Features = new List<GeneticAlgorithm.Range>();
+                    Features.Add(Mass_range);
+                    Features.Add(Zeta_range);
+                    Features.Add(FrequencyRange[i]);
+                    _GA = new GeneticAlgorithm(population, Features, pcross, pmutation, generations);
+                    GA.Add(_GA);
+                }
+
+               
+               
+
+            }
+
+            public List<Mode> Solve()
+            {
+                SetReference(VClose_ref, VR, InitialModes);
+                List<Mode> result = new List<Mode>();
+
+                for(int i=0; i < FrequencyRange.Count; i++)
+                {
+                    RangeStatus = i;
+                    GA[i].Solve(ObjFunction);
+                    double[] BestParameters = GA[i].OPTResult.Parameters;
+                    Mode _Mode = new Mode();
+                    _Mode.Freq = BestParameters[2];
+                    _Mode.Mass = BestParameters[0];
+                    _Mode.Zeta = BestParameters[1];
+                    result.Add(_Mode);
+                }
+               
+                return result;
+            }
+
+            private double ObjFunction(double[] parameters)
+            {
+                
+                List<Mode> VLoopModes = new List<Mode>();
+
+                Mode mode = new Mode();
+                mode.Freq = parameters[2];
+                //It shoud be in this order
+                mode.Mass = parameters[0];
+                mode.Zeta = parameters[1];
+
+                VLoopModes = InitialModes;
+                VLoopModes.RemoveAt(RangeStatus);    
+                VLoopModes.Insert(RangeStatus,mode);
+                
+                VR.VLoopModes = VLoopModes;
+                FRF[] Eval = VR.SolveCloseLoopResponse();
+                List<FRF[]> RegionEval = GettingRegionReference(Eval);
+
+
+                double Error = 0;
+                double LocalError = 0;
+                for (int i = 0; i < RegionEval[RangeStatus].Length; i++)
+                {
+                    LocalError = Math.Abs(Target[RangeStatus][i].Mag - RegionEval[RangeStatus][i].Mag)+LocalError;
+                }
+                Error = Error + LocalError;
+                
+                return Sensibility/Error;
+            }
+
+            public void SetReference(FRF[] vClose_ref, VelocityResponse vR, List<Mode> initialModes )
+            {
+                VClose_ref = vClose_ref;
+                VR = vR;
+                Target = new List<FRF[]>();
+                Target = GettingRegionReference(vClose_ref);
+
+                InitialModes = initialModes;
+                               
+            }
+
+            private List<FRF[]> GettingRegionReference(FRF[] vClose_ref)
+            {
+                List<FRF[]> _target = new List<FRF[]>();
+                for (int i = 0; i < FrequencyRange.Count; i++)
+                {
+                    List<FRF> aux = new List<FRF>();
+                   
+                    for (int data = 0; data < vClose_ref.Length; data++)
+                    {
+                        if (vClose_ref[data].Freq >= FrequencyRange[i].MinValue && vClose_ref[data].Freq <= FrequencyRange[i].MaxValue)
+                        {
+                            FRF target = new FRF();
+                            target = vClose_ref[data];
+                            aux.Add(target);
+                        }
+                    }
+                    _target.Add((FRF[])aux.ToArray().Clone());
+                }
+
+                return _target;
+            }
+        }
     }
+
+
+    
+
+
 }

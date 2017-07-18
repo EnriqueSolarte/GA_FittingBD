@@ -19,7 +19,6 @@ namespace Optimization
         {
             if (Validation())
             {
-
                 PopulationsHistory.Clear();
                 FitnessHistory.Clear();
 
@@ -42,7 +41,7 @@ namespace Optimization
                 OPTHistoryResult.Add(new Result
                 {
                     Parameters = (double[])initialFitness.BestFeature.Clone(),
-                    target = initialFitness.MaxFitness
+                    target = new double[2] { initialFitness.MaxFitness, initialFitness.MeanFitness }
                 });
 
                 #endregion
@@ -50,14 +49,13 @@ namespace Optimization
                 int gen = 0;
 
                 #region While Loop for Genereations
-                while (gen < GA_Settings.Generations-1 && !(FitnessHistory.Last().MaxFitness > GA_Settings.TargetRange.MinValue && FitnessHistory.Last().MaxFitness < GA_Settings.TargetRange.MaxValue))
+                while (gen < GA_Settings.Generations - 1)
                 {
                     double[][] currentPopulation = PopulationsHistory.Last();
                     Fitness currentFitness = FitnessHistory.Last();
 
                     double[][] newPopulation = new double[GA_Settings.PopulationSize][];
-                    Fitness newFitness = new Fitness(GA_Settings.PopulationSize);
-
+                   
                     #region GA
                     newPopulation = Selection(currentPopulation, currentFitness.FitnessPopulation);
                     newPopulation[0] = (double[])currentFitness.BestFeature.Clone();
@@ -65,12 +63,11 @@ namespace Optimization
                     newPopulation = Mutation(newPopulation);
                     #endregion
 
-
+                    Fitness newFitness = new Fitness(GA_Settings.PopulationSize);
                     for (int i = 0; i < GA_Settings.PopulationSize; i++)
                     {
                         newFitness.FitnessPopulation[i] = ObjFunc(newPopulation[i]);
                     }
-
                     newFitness.SetFitenessData();
                     newFitness.BestFeature = (double[])newPopulation[newFitness.MaxFitnessIndex].Clone();
 
@@ -91,7 +88,7 @@ namespace Optimization
                     OPTHistoryResult.Add(new Result
                     {
                         Parameters = (double[])newFitness.BestFeature.Clone(),
-                        target = newFitness.MaxFitness
+                        target = new double[2] { newFitness.MaxFitness, newFitness.MeanFitness }
                     });
 
                     gen++;
@@ -111,7 +108,6 @@ namespace Optimization
         #endregion
 
         public Settings GA_Settings { get; set; }
-
         public List<double[][]> PopulationsHistory { get; }
         public List<Fitness> FitnessHistory { get; }
 
@@ -129,6 +125,7 @@ namespace Optimization
             GA_Settings.Generations = generations;
             GA_Settings.TargetRange = new Range { MinValue = 0, MaxValue = 0 };
 
+          
             PopulationsHistory = new List<double[][]>();
             FitnessHistory = new List<Fitness>();
 
@@ -185,6 +182,7 @@ namespace Optimization
                     aux[j] = GA_Settings.RangeFeatures.ElementAt(j).MinValue + rnd.NextDouble() * (GA_Settings.RangeFeatures.ElementAt(j).MaxValue - GA_Settings.RangeFeatures.ElementAt(j).MinValue);
                 }
                 newPopulation[i] = aux;
+
             }
             return newPopulation;
         }
@@ -219,7 +217,7 @@ namespace Optimization
         private double[][] Crossover(double[][] currentPopulation)
         {
             Random rnd = new Random();
-            double[][] selectedPopulation = currentPopulation;
+            double[][] selectedPopulation = (double[][])currentPopulation.Clone();
 
             for (int i = 0; i < GA_Settings.PopulationSize; i = i + 2)
             {
@@ -239,7 +237,7 @@ namespace Optimization
         private double[][] Mutation(double[][] currentPopulation)
         {
             Random rnd = new Random();
-            double[][] selectedPopulation = currentPopulation;
+            double[][] selectedPopulation = (double[][])currentPopulation.Clone();
 
             for (int i = 0; i < GA_Settings.PopulationSize; i++)
             {
