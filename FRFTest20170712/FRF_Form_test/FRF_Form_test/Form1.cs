@@ -7,6 +7,7 @@ using Mechatronics.Analysis;
 using Optimization;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace FRF_Form_test
 {
@@ -71,34 +72,36 @@ namespace FRF_Form_test
 
         }
 
+       
+        
+
+    #region Fixed Parameters
+
         void CreateModes(List<Mode> VLoopModes)
-        {
+    {
 
-            Mode mode;
+        Mode mode;
 
-            mode = new Mode();
-            mode.Freq = 55;
-            mode.Zeta = 0.1;
-            mode.Mass = 0.3;
-            VLoopModes.Add(mode);
-            
-
-            mode = new Mode();
-            mode.Freq = 120;
-            mode.Zeta = 0.07;
-            mode.Mass = 0.1;
-            VLoopModes.Add(mode);
-
-            mode = new Mode();
-            mode.Freq = 315;
-            mode.Zeta = 0.1;
-            mode.Mass = 0.05;
-            VLoopModes.Add(mode);
+        mode = new Mode();
+        mode.Freq = 55;
+        mode.Zeta = 0.1;
+        mode.Mass = 0.3;
+        VLoopModes.Add(mode);
 
 
-        }
+        mode = new Mode();
+        mode.Freq = 120;
+        mode.Zeta = 0.07;
+        mode.Mass = 0.1;
+        VLoopModes.Add(mode);
 
-        #region Fixed Parameters
+        mode = new Mode();
+        mode.Freq = 315;
+        mode.Zeta = 0.1;
+        mode.Mass = 0.05;
+        VLoopModes.Add(mode);
+
+    }
         void SetParameters(Parameters P)
         {//value is from *.prm file (ServoGuide Parameter file)
             P.FANUCs.HRVGain = 300;
@@ -120,6 +123,8 @@ namespace FRF_Form_test
             P.ConvertFUNUCParamters();
 
         }
+        #endregion
+        
         void DrawLine(FRF[] FRFData, int Channel)
         {
             //X AXIS in log scale
@@ -138,8 +143,9 @@ namespace FRF_Form_test
             }
 
         }
-        #endregion
 
+
+        #region Fitting OPT
         private class FittingOptimization
         {
             public List<GeneticAlgorithm.Range> FrequencyRange { get; set; }
@@ -269,10 +275,22 @@ namespace FRF_Form_test
                 return _target;
             }
         }
+
+        #endregion
+
+        private void InformationTipEvent(object sender, System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs e)
+        {
+            if (e.HitTestResult.ChartElementType == ChartElementType.DataPoint)
+            {
+                DataPoint myPoint = (DataPoint)(e.HitTestResult.Object);
+                e.Text = "X value: " + myPoint.XValue + Environment.NewLine;
+                e.Text += "Y value: " + myPoint.YValues[0] + Environment.NewLine;
+            }
+        }
     }
 
 
-    
+
 
 
 }
