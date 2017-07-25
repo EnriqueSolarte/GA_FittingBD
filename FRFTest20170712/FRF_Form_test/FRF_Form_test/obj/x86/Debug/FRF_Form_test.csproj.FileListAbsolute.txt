@@ -23,10 +23,11 @@ D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Fo
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\FRF_Form_test.pdb
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\Mechatronics.pdb
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.csprojResolveAssemblyReference.cache
-D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.Form1.resources
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.Properties.Resources.resources
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.csproj.GenerateResource.Cache
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\GeneticAlgorithm.dll
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\IOPT.dll
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\GeneticAlgorithm.pdb
 D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\bin\Debug\IOPT.pdb
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.FormGAOptions.resources
+D:\GitHub\Fitting Bode Diagram\GA_FittingBD\FRFTest20170712\FRF_Form_test\FRF_Form_test\obj\x86\Debug\FRF_Form_test.FormMain.resources

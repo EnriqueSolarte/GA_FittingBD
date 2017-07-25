@@ -112,7 +112,40 @@ namespace Optimization
         public List<double[][]> PopulationsHistory { get; }
         public List<Fitness> FitnessHistory { get; }
 
-        
+        public double[] GetMaxFitnessHistory()
+        {
+            double[] MaxFitnessHistory = new double[GA_Settings.Generations];
+
+            Parallel.For(0, GA_Settings.Generations, i =>
+            {
+                MaxFitnessHistory[i] = FitnessHistory[i].MaxFitness;
+            });
+
+            return MaxFitnessHistory;
+        }
+
+        public double[] GetMeanFitnessHistory()
+        {
+            double[] MeanFitnessHistory = new double[GA_Settings.Generations];
+            Parallel.For(0, GA_Settings.Generations, i =>
+            {
+                MeanFitnessHistory[i] = FitnessHistory[i].MeanFitness;
+            });
+
+            return MeanFitnessHistory;
+        }
+
+        public double[] GetFeatureHistory(int index = 0)
+        {
+            double[] Feature = new double[GA_Settings.Generations];
+            Parallel.For(0, GA_Settings.Generations, i =>
+            {
+                Feature[i] = FitnessHistory[i].BestFeature[index];
+            });
+
+            return Feature;
+        }
+
         #endregion
 
         #region Consntructors

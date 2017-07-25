@@ -1,6 +1,6 @@
 ﻿namespace FRF_Form_test
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         /// 設計工具所需的變數。
@@ -38,18 +38,18 @@
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart_mag = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart_phs = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textBoxMag_1 = new System.Windows.Forms.TextBox();
+            this.textBoxMag_2 = new System.Windows.Forms.TextBox();
+            this.textBoxMag_3 = new System.Windows.Forms.TextBox();
+            this.textBoxFreq_1 = new System.Windows.Forms.TextBox();
+            this.textBoxFreq_2 = new System.Windows.Forms.TextBox();
+            this.textBoxFreq_3 = new System.Windows.Forms.TextBox();
+            this.textBoxFreqMin_1 = new System.Windows.Forms.TextBox();
+            this.textBoxFreqMin_2 = new System.Windows.Forms.TextBox();
+            this.textBoxFreqMin_3 = new System.Windows.Forms.TextBox();
+            this.textBoxFreqMax_1 = new System.Windows.Forms.TextBox();
+            this.textBoxFreqMax_2 = new System.Windows.Forms.TextBox();
+            this.textBoxFreqMax_3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -114,89 +114,101 @@
             this.chart_phs.Text = "chart_phs";
             this.chart_phs.GetToolTipText += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs>(this.InformationTipEvent);
             // 
-            // textBox1
+            // textBoxMag_1
             // 
-            this.textBox1.Location = new System.Drawing.Point(54, 667);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 2;
+            this.textBoxMag_1.Location = new System.Drawing.Point(54, 667);
+            this.textBoxMag_1.Name = "textBoxMag_1";
+            this.textBoxMag_1.Size = new System.Drawing.Size(100, 22);
+            this.textBoxMag_1.TabIndex = 2;
+            this.textBoxMag_1.Text = "-2";
             // 
-            // textBox2
+            // textBoxMag_2
             // 
-            this.textBox2.Location = new System.Drawing.Point(54, 695);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 2;
+            this.textBoxMag_2.Location = new System.Drawing.Point(54, 695);
+            this.textBoxMag_2.Name = "textBoxMag_2";
+            this.textBoxMag_2.Size = new System.Drawing.Size(100, 22);
+            this.textBoxMag_2.TabIndex = 2;
+            this.textBoxMag_2.Text = "-3";
             // 
-            // textBox3
+            // textBoxMag_3
             // 
-            this.textBox3.Location = new System.Drawing.Point(54, 723);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 2;
+            this.textBoxMag_3.Location = new System.Drawing.Point(54, 723);
+            this.textBoxMag_3.Name = "textBoxMag_3";
+            this.textBoxMag_3.Size = new System.Drawing.Size(100, 22);
+            this.textBoxMag_3.TabIndex = 2;
+            this.textBoxMag_3.Text = "-6.4";
             // 
-            // textBox4
+            // textBoxFreq_1
             // 
-            this.textBox4.Location = new System.Drawing.Point(160, 667);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 22);
-            this.textBox4.TabIndex = 2;
+            this.textBoxFreq_1.Location = new System.Drawing.Point(160, 667);
+            this.textBoxFreq_1.Name = "textBoxFreq_1";
+            this.textBoxFreq_1.Size = new System.Drawing.Size(100, 22);
+            this.textBoxFreq_1.TabIndex = 2;
+            this.textBoxFreq_1.Text = "60";
             // 
-            // textBox5
+            // textBoxFreq_2
             // 
-            this.textBox5.Location = new System.Drawing.Point(160, 695);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 22);
-            this.textBox5.TabIndex = 2;
+            this.textBoxFreq_2.Location = new System.Drawing.Point(160, 695);
+            this.textBoxFreq_2.Name = "textBoxFreq_2";
+            this.textBoxFreq_2.Size = new System.Drawing.Size(100, 22);
+            this.textBoxFreq_2.TabIndex = 2;
+            this.textBoxFreq_2.Text = "125";
             // 
-            // textBox6
+            // textBoxFreq_3
             // 
-            this.textBox6.Location = new System.Drawing.Point(160, 723);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 22);
-            this.textBox6.TabIndex = 2;
+            this.textBoxFreq_3.Location = new System.Drawing.Point(160, 723);
+            this.textBoxFreq_3.Name = "textBoxFreq_3";
+            this.textBoxFreq_3.Size = new System.Drawing.Size(100, 22);
+            this.textBoxFreq_3.TabIndex = 2;
+            this.textBoxFreq_3.Text = "335";
             // 
-            // textBox7
+            // textBoxFreqMin_1
             // 
-            this.textBox7.Location = new System.Drawing.Point(304, 667);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 22);
-            this.textBox7.TabIndex = 2;
+            this.textBoxFreqMin_1.Location = new System.Drawing.Point(304, 667);
+            this.textBoxFreqMin_1.Name = "textBoxFreqMin_1";
+            this.textBoxFreqMin_1.Size = new System.Drawing.Size(100, 22);
+            this.textBoxFreqMin_1.TabIndex = 2;
+            this.textBoxFreqMin_1.Text = "55";
             // 
-            // textBox8
+            // textBoxFreqMin_2
             // 
-            this.textBox8.Location = new System.Drawing.Point(304, 695);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 22);
-            this.textBox8.TabIndex = 2;
+            this.textBoxFreqMin_2.Location = new System.Drawing.Point(304, 695);
+            this.textBoxFreqMin_2.Name = "textBoxFreqMin_2";
+            this.textBoxFreqMin_2.Size = new System.Drawing.Size(100, 22);
+            this.textBoxFreqMin_2.TabIndex = 2;
+            this.textBoxFreqMin_2.Text = "115";
             // 
-            // textBox9
+            // textBoxFreqMin_3
             // 
-            this.textBox9.Location = new System.Drawing.Point(304, 723);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 22);
-            this.textBox9.TabIndex = 2;
+            this.textBoxFreqMin_3.Location = new System.Drawing.Point(304, 723);
+            this.textBoxFreqMin_3.Name = "textBoxFreqMin_3";
+            this.textBoxFreqMin_3.Size = new System.Drawing.Size(100, 22);
+            this.textBoxFreqMin_3.TabIndex = 2;
+            this.textBoxFreqMin_3.Text = "290";
             // 
-            // textBox10
+            // textBoxFreqMax_1
             // 
-            this.textBox10.Location = new System.Drawing.Point(420, 667);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 22);
-            this.textBox10.TabIndex = 2;
+            this.textBoxFreqMax_1.Location = new System.Drawing.Point(420, 667);
+            this.textBoxFreqMax_1.Name = "textBoxFreqMax_1";
+            this.textBoxFreqMax_1.Size = new System.Drawing.Size(100, 22);
+            this.textBoxFreqMax_1.TabIndex = 2;
+            this.textBoxFreqMax_1.Text = "60";
             // 
-            // textBox11
+            // textBoxFreqMax_2
             // 
-            this.textBox11.Location = new System.Drawing.Point(420, 695);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(100, 22);
-            this.textBox11.TabIndex = 2;
+            this.textBoxFreqMax_2.Location = new System.Drawing.Point(420, 695);
+            this.textBoxFreqMax_2.Name = "textBoxFreqMax_2";
+            this.textBoxFreqMax_2.Size = new System.Drawing.Size(100, 22);
+            this.textBoxFreqMax_2.TabIndex = 2;
+            this.textBoxFreqMax_2.Text = "220";
             // 
-            // textBox12
+            // textBoxFreqMax_3
             // 
-            this.textBox12.Location = new System.Drawing.Point(420, 723);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(100, 22);
-            this.textBox12.TabIndex = 2;
+            this.textBoxFreqMax_3.Location = new System.Drawing.Point(420, 723);
+            this.textBoxFreqMax_3.Name = "textBoxFreqMax_3";
+            this.textBoxFreqMax_3.Size = new System.Drawing.Size(100, 22);
+            this.textBoxFreqMax_3.TabIndex = 2;
+            this.textBoxFreqMax_3.Text = "580";
             // 
             // label1
             // 
@@ -273,7 +285,7 @@
             this.buttonOptimizationOptions.UseVisualStyleBackColor = true;
             this.buttonOptimizationOptions.Click += new System.EventHandler(this.GeneticAlgorithmOptionsBntEvent);
             // 
-            // Form1
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -286,23 +298,23 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox12);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox11);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox10);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxFreqMax_3);
+            this.Controls.Add(this.textBoxFreqMin_3);
+            this.Controls.Add(this.textBoxFreq_3);
+            this.Controls.Add(this.textBoxMag_3);
+            this.Controls.Add(this.textBoxFreqMax_2);
+            this.Controls.Add(this.textBoxFreqMin_2);
+            this.Controls.Add(this.textBoxFreq_2);
+            this.Controls.Add(this.textBoxMag_2);
+            this.Controls.Add(this.textBoxFreqMax_1);
+            this.Controls.Add(this.textBoxFreqMin_1);
+            this.Controls.Add(this.textBoxFreq_1);
+            this.Controls.Add(this.textBoxMag_1);
             this.Controls.Add(this.chart_phs);
             this.Controls.Add(this.chart_mag);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.chart_mag)).EndInit();
@@ -316,18 +328,18 @@
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_mag;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_phs;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textBoxMag_1;
+        private System.Windows.Forms.TextBox textBoxMag_2;
+        private System.Windows.Forms.TextBox textBoxMag_3;
+        private System.Windows.Forms.TextBox textBoxFreq_1;
+        private System.Windows.Forms.TextBox textBoxFreq_2;
+        private System.Windows.Forms.TextBox textBoxFreq_3;
+        private System.Windows.Forms.TextBox textBoxFreqMin_1;
+        private System.Windows.Forms.TextBox textBoxFreqMin_2;
+        private System.Windows.Forms.TextBox textBoxFreqMin_3;
+        private System.Windows.Forms.TextBox textBoxFreqMax_1;
+        private System.Windows.Forms.TextBox textBoxFreqMax_2;
+        private System.Windows.Forms.TextBox textBoxFreqMax_3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

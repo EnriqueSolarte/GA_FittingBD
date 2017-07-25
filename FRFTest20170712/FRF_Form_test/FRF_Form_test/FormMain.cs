@@ -11,13 +11,13 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace FRF_Form_test
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         FRF[] VClose_ref;
         VelocityResponse VR;
         FittingOptimization FittingOPT;
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
 
@@ -32,13 +32,13 @@ namespace FRF_Form_test
             //Defining target, read FRF file from csv file, which is created by servoguide
             VClose_ref = VR.ReadServoGuide_FRFdata_csv("Frequency_Response_Axis-1_1_-_1000Hz.csv");
             VR.IsFreqDataSameAsRef = true;
-            DrawLine(VClose_ref, 0);
+            DrawLine(VClose_ref, 0,chart_mag,chart_phs);
 
         }
 
         #region Fixed Code
 
-        void CreateModes(List<Mode> VLoopModes)
+        public static void CreateModes(List<Mode> VLoopModes)
         {
 
             Mode mode;
@@ -73,6 +73,8 @@ namespace FRF_Form_test
             P.FANUCs.No2044_KVP_Setting = -1775;
 
 
+
+
             P.Jm = 0.012;
             P.Kt = 1.2;
             P.dTzoh = 0.001m;
@@ -83,11 +85,13 @@ namespace FRF_Form_test
 
             P.ConvertFUNUCParamters();
 
-        }
 
+           
+        }
 
         void DrawLine(FRF[] FRFData, int Channel)
         {
+
             //X AXIS in log scale
             chart_mag.ChartAreas[0].AxisX.IsLogarithmic = true;
             chart_phs.ChartAreas[0].AxisX.IsLogarithmic = true;
@@ -102,8 +106,24 @@ namespace FRF_Form_test
                 chart_phs.Series[Channel].Points.AddXY(FRFData[i].Freq, FRFData[i].Phs);
 
             }
-
         }
+        internal static void DrawLine(FRF[] FRFData, int Channel, Chart Chart_mag, Chart Chart_phs)
+        {
+            //X AXIS in log scale
+            Chart_mag.ChartAreas[0].AxisX.IsLogarithmic = true;
+            Chart_phs.ChartAreas[0].AxisX.IsLogarithmic = true;
+
+            //reset
+            Chart_mag.Series[Channel].Points.Clear();
+            Chart_phs.Series[Channel].Points.Clear();
+
+            for (int i = 0; i < FRFData.Length; i++)
+            {
+                Chart_mag.Series[Channel].Points.AddXY(FRFData[i].Freq, Mechatronics.MathToolBox.TL.DB(FRFData[i].Mag));
+                Chart_phs.Series[Channel].Points.AddXY(FRFData[i].Freq, FRFData[i].Phs);
+            }
+        }
+
         private void InformationTipEvent(object sender, System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs e)
         {
             if (e.HitTestResult.ChartElementType == ChartElementType.DataPoint)
@@ -117,19 +137,21 @@ namespace FRF_Form_test
         #endregion
 
         #region Fitting OPT
-        private class FittingOptimization
-        {
+        public class FittingOptimization
+        {     
+            
             public List<GeneticAlgorithm.Range> FrequencyRange { get; set; }
             public List<GeneticAlgorithm> GA { get; set; }
             public VelocityResponse VR { get; set; }
             public FRF[] VClose_ref { get; set; }
             public double Sensibility { get; set; }
 
-            private GeneticAlgorithm.Range Mass_range;
-            private GeneticAlgorithm.Range Zeta_range;
-            private List<GeneticAlgorithm.Range> Features; // internal Varaiable to GA
-            private List<FRF[]> Target;
 
+            public GeneticAlgorithm.Range Mass_range { get; set; }
+            public GeneticAlgorithm.Range Zeta_range { get; set; }
+            private List<GeneticAlgorithm.Range> Features;// internal Varaiable to GA
+
+            private List<FRF[]> Target;
             private List<Mode> InitialModes;
             private int RangeStatus;
 
@@ -165,6 +187,7 @@ namespace FRF_Form_test
 
             public List<Mode> Solve()
             {
+                
                 SetReference(VClose_ref, VR, InitialModes);
                 List<Mode> result = new List<Mode>();
 
@@ -177,12 +200,14 @@ namespace FRF_Form_test
                     _Mode.Freq = BestParameters[2];
                     _Mode.Mass = BestParameters[0];
                     _Mode.Zeta = BestParameters[1];
+                 
                     result.Add(_Mode);
                 });
+                
 
                 return result;
             }
-
+            
             private double ObjFunction(double[] parameters)
             {
 
@@ -249,22 +274,41 @@ namespace FRF_Form_test
 
         #endregion
 
-        private void GeneticAlgorithmOptimization()
+        #region MyRegion
+        public class InitialFrequencyPoints
+        {
+            public double ResonantMagPeak;
+            public double ResonantFreqPeak;
+            public GeneticAlgorithm.Range FrequencyRage;
+
+        }
+
+        public static double TryToDouble(string stringValue)
+        {
+            double auxOut;
+            double.TryParse(stringValue, out auxOut);
+            return auxOut;
+        }
+
+        #endregion
+
+        public void GeneticAlgorithmOptimization(List<InitialFrequencyPoints> ResonantPeak)
         {
             List<Mode> VLoopModes = new List<Mode>();
             CreateModes(VLoopModes);
 
-            GeneticAlgorithm.Range Mass_range = new GeneticAlgorithm.Range { MinValue = 0.0001, MaxValue = 1 };
+            GeneticAlgorithm.Range Mass_range = new GeneticAlgorithm.Range { MinValue = 0.001, MaxValue = 1 };
             GeneticAlgorithm.Range Zeta_range = new GeneticAlgorithm.Range { MinValue = 0.01, MaxValue = 0.5 };
 
             List<GeneticAlgorithm.Range> FrequencyRange = new List<GeneticAlgorithm.Range>();
-            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 50, MaxValue = 70 });
-            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 110, MaxValue = 190 });
-            FrequencyRange.Add(new GeneticAlgorithm.Range { MinValue = 270, MaxValue = 620 });
+            for(int i=0; i < ResonantPeak.Count; i++)
+            {
+                FrequencyRange.Add(ResonantPeak[i].FrequencyRage);
+            }
 
             FittingOPT = new FittingOptimization(Mass_range, Zeta_range, FrequencyRange);
 
-            FittingOPT.SetOptimizationParameters(20, 1, 0.9, 500, 20);
+            FittingOPT.SetOptimizationParameters(100, 1, 0.9, 50, 500);
 
             FittingOPT.SetReference(VClose_ref, VR, VLoopModes);
 
@@ -286,14 +330,47 @@ namespace FRF_Form_test
         private void FittingCurveBtnEvent(object sender, EventArgs e)
         {
             buttonCreateFiittingCurve.Enabled = false;
-            GeneticAlgorithmOptimization();          
+            
+            List<InitialFrequencyPoints> InitialValues = GetInitialValues();
+            GeneticAlgorithmOptimization(InitialValues);          
             buttonCreateFiittingCurve.Enabled = true;
             buttonOptimizationOptions.Enabled = true;
         }
 
+        private List<InitialFrequencyPoints> GetInitialValues()
+        {
+            List<InitialFrequencyPoints> _InitialValues = new List<InitialFrequencyPoints>();
+
+            InitialFrequencyPoints ResonantPeakPoint = new InitialFrequencyPoints();
+            ResonantPeakPoint.ResonantMagPeak = TryToDouble(textBoxMag_1.Text);
+            ResonantPeakPoint.ResonantFreqPeak = TryToDouble(textBoxFreq_1.Text);
+            ResonantPeakPoint.FrequencyRage.MinValue = TryToDouble(textBoxFreqMin_1.Text);
+            ResonantPeakPoint.FrequencyRage.MaxValue = TryToDouble(textBoxFreqMax_1.Text);
+            _InitialValues.Add(ResonantPeakPoint);
+
+            ResonantPeakPoint = new InitialFrequencyPoints();
+            ResonantPeakPoint.ResonantMagPeak = TryToDouble(textBoxMag_2.Text);
+            ResonantPeakPoint.ResonantFreqPeak = TryToDouble(textBoxFreq_2.Text);
+            ResonantPeakPoint.FrequencyRage.MinValue = TryToDouble(textBoxFreqMin_2.Text);
+            ResonantPeakPoint.FrequencyRage.MaxValue = TryToDouble(textBoxFreqMax_2.Text);
+            _InitialValues.Add(ResonantPeakPoint);
+
+            ResonantPeakPoint = new InitialFrequencyPoints();
+            ResonantPeakPoint.ResonantMagPeak = TryToDouble(textBoxMag_3.Text);
+            ResonantPeakPoint.ResonantFreqPeak = TryToDouble(textBoxFreq_3.Text);
+            ResonantPeakPoint.FrequencyRage.MinValue = TryToDouble(textBoxFreqMin_3.Text);
+            ResonantPeakPoint.FrequencyRage.MaxValue = TryToDouble(textBoxFreqMax_3.Text);
+            _InitialValues.Add(ResonantPeakPoint);
+
+            return _InitialValues;
+        }
+       
         private void GeneticAlgorithmOptionsBntEvent(object sender, EventArgs e)
         {
+            List<InitialFrequencyPoints> InitialValues = GetInitialValues();
+            FormGAOptions form = new FormGAOptions(VClose_ref, VR, FittingOPT, InitialValues);
 
+            form.Show();
         }
     }
 
